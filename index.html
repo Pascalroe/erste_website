@@ -3,98 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angebotsübersicht</title>
+    <title>Ihre professionelle Webseite - Einfach, schnell, effektiv</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        :root {
+            --primary: #2d3748;
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            font-size: 2rem;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
         }
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-        .grid {
+        a {
+            text-decoration: none;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .nav-links a {
+            color: var(--gray);
+            margin-left: 25px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a5568 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background: white;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .problem-list {
+            text-align: left;
+            margin: 30px 0;
+            padding-left: 20px;
+        }
+        .problem-list li {
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .solution-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .solution-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .solution-card p {
+            color: var(--gray);
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background: white;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .step p {
+            color: var(--gray);
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        .benefits-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-        }
-        .angebot {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .angebot h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .preis {
-            color: #667eea;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .beschreibung {
-            color: #666;
-            line-height: 1.6;
-        }
-        footer {
-            text-align: center;
             margin-top: 40px;
-            color: #666;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        .benefit-icon {
+            font-size: 1.5rem;
+        }
+        .benefit-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .benefit-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+            color: white;
+            text-align: center;
+        }
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .cta .btn {
+            background: white;
+            color: var(--accent);
+        }
+        .cta .btn:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer a {
+            color: rgba(255,255,255,0.7);
+            margin: 0 15px;
+        }
+        footer a:hover {
+            color: white;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🏷️ Angebotsübersicht</h1>
-            <p>Unsere aktuellen Angebote für Sie</p>
-        </header>
-        
-        <div class="grid">
-            <div class="angebot">
-                <h2>Produkt A</h2>
-                <div class="preis">€99,00</div>
-                <p class="beschreibung">Beschreibung folgt...</p>
-            </div>
-            <div class="angebot">
-                <h2>Produkt B</h2>
-                <div class="preis">€149,00</div>
-                <p class="beschreibung">Beschreibung folgt...</p>
-            </div>
-            <div class="angebot">
-                <h2>Produkt C</h2>
-                <div class="preis">€79,00</div>
-                <p class="beschreibung">Beschreibung folgt...</p>
-            </div>
-            <div class="angebot">
-                <h2>Produkt D</h2>
-                <div class="preis">€199,00</div>
-                <p class="beschreibung">Beschreibung folgt...</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Webdesign</div>
+            <div class="nav-links">
+                <a href="#problem">Problem</a>
+                <a href="#loesung">Lösung</a>
+                <a href="#ablauf">Ablauf</a>
+                <a href="#vorteile">Vorteile</a>
+                <a href="#kontakt">Kontakt</a>
             </div>
         </div>
-        
-        <footer>
-            <p>&copy; 2026 - Alle Angaben ohne Gewähr</p>
-        </footer>
-    </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Ihre neue Webseite in [X] Tagen – professionell, modern, effektiv</h1>
+            <p>Sie bekommen eine maßgeschneiderte Website, die Ihre Besucher überzeugt und conversions bringt. Ohne Stress, ohne technische Kopfschmerzen.</p>
+            <a href="#kontakt" class="btn">Jetzt unverbindlich anfragen</a>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <h2 class="section-title">Kennen Sie das?</h2>
+            <div class="problem-content">
+                <p>Sie wissen, dass Sie eine Webseite brauchen – aber der Gedanke daran stresst Sie.</p>
+                <ul class="problem-list">
+                    <li>Sie haben keine Zeit, sich um technische Details zu kümmern</li>
+                    <li>Sie fühlen sich von verschiedenen Anbietern überfordert</li>
+                    <li>Sie haben Angst vor versteckten Kosten und langen Bearbeitungszeiten</li>
+                    <li>Sie möchten endlich online gefunden werden, wissen aber nicht wie</li>
+                </ul>
+                <p>Das muss nicht so sein. Ich mache es Ihnen einfach.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="solution" id="loesung">
+        <div class="container">
+            <h2 class="section-title">Was Sie bekommen</h2>
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <h3>🎯 Klares Design</h3>
+                    <p>Eine moderne, benutzerfreundliche Gestaltung, die Ihre Botschaft klar vermittelt und Vertrauen aufbaut.</p>
+                </div>
+                <div class="solution-card">
+                    <h3>📱 Responsive</h3>
+                    <p>Ihre Webseite sieht auf allen Geräten perfekt aus – vom Smartphone bis zum Desktop.</p>
+                </div>
+                <div class="solution-card">
+                    <h3>⚡ Schnell geladen</h3>
+                    <p>Optimierte Ladezeiten, damit Besucher nicht abspringen und Sie besser gefunden werden.</p>
+                </div>
+                <div class="solution-card">
+                    <h3>🔧 Einfach verwaltbar</h3>
+                    <p>Sie können Texte und Bilder selbst ganz einfach anpassen – ohne Programmierkenntnisse.</p>
+                </div>
+                <div class="solution-card">
+                    <h3>📊 Professionell</h3>
+                    <p>Ein Auftritt, der zeigt, dass Sie Ihr Handwerk verstehen und Wert auf Qualität legen.</p>
+                </div>
+                <div class="solution-card">
+                    <h3>🤝 Persönlich</h3>
+                    <p>Direkte Kommunikation, kurze Reaktionszeiten, individuell auf Ihre Bedürfnisse abgestimmt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section class="process" id="ablauf">
+        <div class="container">
+            <h2 class="section-title">So einfach funktioniert's</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Kontakt</h3>
+                    <p>Sie schreiben mir eine Nachricht und erzählen mir von Ihrem Projekt.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Beratung</h3>
+                    <p>Wir besprechen Ihre Wünsche und ich erstelle ein unverbindliches Angebot.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Umsetzung</h3>
+                    <p>Ich setze Ihre Webseite um – regelmäßige Zwischenstände inklusive.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Launch</h3>
+                    <p>Ihre Webseite geht live. Auf Wunsch auch mit Schulung zur einfachen Pflege.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits" id="vorteile">
+        <div class="container">
+            <h2 class="section-title">Warum mein Angebot?</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div>
+                        <h4>Schneller Start</h4>
+                        <p>Ihre Webseite ist in [X] Tagen fertig – nicht in Wochen oder Monaten.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div>
+                        <h4>Faire Preise</h4>
+                        <p>Transparente Kosten ohne versteckte Gebühren. Sie wissen vorher, was Sie bezahlen.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div>
+                        <h4>Focus auf das Wesentliche</h4>
+                        <p>Ich konzentriere mich auf das, was wirklich zählt: Ihre Botschaft klar vermitteln.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔄</div>
+                    <div>
+                        <h4>Flexibel anpassbar</h4>
+                        <p>Änderungen sind jederzeit möglich. Ihre Webseite wächst mit Ihrem Unternehmen.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛠</div>
+                    <div>
+                        <h4>Technischer Support</h4>
+                        <p>Nach dem Launch bin ich weiterhin für Sie da – bei Fragen oder Problemen.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📈</div>
+                    <div>
+                        <h4>SEO-Grundlagen</h4>
+                        <p>Ihre Webseite ist von Anfang an für Suchmaschinen optimiert.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta" id="kontakt">
+        <div class="container">
+            <h2>Bereit für Ihre neue Webseite?</h2>
+            <p>Lassen Sie uns reden. Ich freue mich auf Ihre Nachricht.</p>
+            <a href="mailto:ihre-email@beispiel.de" class="btn">Kontakt aufnehmen</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 [Firmenname]. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 10px;">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
