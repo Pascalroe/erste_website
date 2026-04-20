@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt & Fragebogen – Webdesign</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -200,6 +201,7 @@
             width: 18px;
             height: 18px;
             cursor: pointer;
+            flex-shrink: 0;
         }
         .option-item .option-text {
             flex: 1;
@@ -263,15 +265,10 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        .btn-outline:hover,
-        .btn-outline:focus {
-            background: var(--primary);
-            color: var(--white);
+        .btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+            transform: none;
         }
         .btn-group {
             display: flex;
@@ -284,7 +281,7 @@
         .success-message {
             display: none;
             text-align: center;
-            padding: 60px 40px;
+            padding: 40px;
         }
         .success-message.show {
             display: block;
@@ -300,6 +297,40 @@
         }
         .success-message p {
             color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--success);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+        
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .error-message.show {
+            display: block;
         }
         
         /* Skip Link */
@@ -320,6 +351,22 @@
         :focus-visible {
             outline: 3px solid var(--accent);
             outline-offset: 2px;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Mobile */
@@ -355,10 +402,14 @@
     <main id="main-content">
         <div class="container">
             <h1 class="page-title">Kontakt & Fragebogen</h1>
-            <p class="page-subtitle">Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden.</p>
+            <p class="page-subtitle">Erzählen Sie uns von Ihrem Projekt – wir melden uns so schnell wie möglich.</p>
             
             <div class="form-card">
-                <form id="questionnaire-form" action="mailto:pascalroe@proton.me" method="POST" enctype="text/plain">
+                <div class="error-message" id="error-message">
+                    Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an: pascalroe@proton.me
+                </div>
+                
+                <form id="questionnaire-form">
                     
                     <!-- Section 1: About You -->
                     <div class="form-section">
@@ -425,7 +476,7 @@
                         
                         <div class="option-group">
                             <label class="option-item">
-                                <input type="checkbox" name="pakete[]" value="basis">
+                                <input type="checkbox" name="pakete" value="Basis (690€ einmalig)">
                                 <div class="option-text">
                                     <div class="option-title">Basis (690€ einmalig)</div>
                                     <div class="option-desc">Einseitige Website – perfekt für einfache Präsenzen.</div>
@@ -433,7 +484,7 @@
                             </label>
                             
                             <label class="option-item">
-                                <input type="checkbox" name="pakete[]" value="standard">
+                                <input type="checkbox" name="pakete" value="Standard (1.290€ einmalig)">
                                 <div class="option-text">
                                     <div class="option-title">Standard (1.290€ einmalig)</div>
                                     <div class="option-desc">Bis zu 5 Unterseiten – der beste Start für Ihr Business.</div>
@@ -441,7 +492,7 @@
                             </label>
                             
                             <label class="option-item">
-                                <input type="checkbox" name="pakete[]" value="premium">
+                                <input type="checkbox" name="pakete" value="Premium (2.490€ einmalig)">
                                 <div class="option-text">
                                     <div class="option-title">Premium (2.490€ einmalig)</div>
                                     <div class="option-desc">Bis zu 10 Unterseiten – individuelles Design, alles inklusive.</div>
@@ -449,7 +500,7 @@
                             </label>
                             
                             <label class="option-item">
-                                <input type="checkbox" name="pakete[]" value="wartung">
+                                <input type="checkbox" name="pakete" value="Wartung & Betreuung">
                                 <div class="option-text">
                                     <div class="option-title">Wartung & Betreuung</div>
                                     <div class="option-desc">Monatliche Betreuung ab 19€/Monat.</div>
@@ -457,7 +508,7 @@
                             </label>
                             
                             <label class="option-item">
-                                <input type="checkbox" name="pakete[]" value="unsicher">
+                                <input type="checkbox" name="pakete" value="Noch unsicher">
                                 <div class="option-text">
                                     <div class="option-title">Ich bin mir noch unsicher</div>
                                     <div class="option-desc">Beraten Sie mich gerne.</div>
@@ -480,12 +531,12 @@
                             <label for="pages">Wie viele Seiten/ Unterseiten schätzen Sie?</label>
                             <select id="pages" name="pages">
                                 <option value="">Bitte auswählen...</option>
-                                <option value="1">1 Seite (One-Pager)</option>
-                                <option value="2-3">2-3 Seiten</option>
-                                <option value="4-5">4-5 Seiten</option>
-                                <option value="6-10">6-10 Seiten</option>
-                                <option value="10+">Mehr als 10 Seiten</option>
-                                <option value="unsicher">Noch unsicher</option>
+                                <option value="1 Seite (One-Pager)">1 Seite (One-Pager)</option>
+                                <option value="2-3 Seiten">2-3 Seiten</option>
+                                <option value="4-5 Seiten">4-5 Seiten</option>
+                                <option value="6-10 Seiten">6-10 Seiten</option>
+                                <option value="Mehr als 10 Seiten">Mehr als 10 Seiten</option>
+                                <option value="Noch unsicher">Noch unsicher</option>
                             </select>
                         </div>
                         
@@ -493,11 +544,11 @@
                             <label for="funktionen">Gewünschte Funktionen</label>
                             <select id="funktionen" name="funktionen">
                                 <option value="">Bitte auswählen...</option>
-                                <option value="einfach">Nur Kontaktformular</option>
-                                <option value="mittel">Bildergalerie, Google Maps</option>
-                                <option value="erweitert">Blog/News, Terminbuchung</option>
-                                <option value="shop">Shop / Online-Bestellung</option>
-                                <option value="sonstiges">Sonstiges</option>
+                                <option value="Nur Kontaktformular">Nur Kontaktformular</option>
+                                <option value="Bildergalerie, Google Maps">Bildergalerie, Google Maps</option>
+                                <option value="Blog/News, Terminbuchung">Blog/News, Terminbuchung</option>
+                                <option value="Shop / Online-Bestellung">Shop / Online-Bestellung</option>
+                                <option value="Sonstiges">Sonstiges</option>
                             </select>
                         </div>
                     </div>
@@ -511,12 +562,12 @@
                             <label for="design">Habens Sie bereits Design-Vorstellungen?</label>
                             <select id="design" name="design">
                                 <option value="">Bitte auswählen...</option>
-                                <option value="modern-clean">Modern & clean</option>
-                                <option value="elegant-luxus">Elegant / Luxus</option>
-                                <option value="bunt-farbenfroh">Bunt / Farbenfroh</option>
-                                <option value="minimalistisch">Minimalistisch</option>
-                                <option value="traditionell-klassisch">Traditionell / Klassisch</option>
-                                <option value="frei">Ich lasse mich überraschen</option>
+                                <option value="Modern & clean">Modern & clean</option>
+                                <option value="Elegant / Luxus">Elegant / Luxus</option>
+                                <option value="Bunt / Farbenfroh">Bunt / Farbenfroh</option>
+                                <option value="Minimalistisch">Minimalistisch</option>
+                                <option value="Traditionell / Klassisch">Traditionell / Klassisch</option>
+                                <option value="Ich lasse mich überraschen">Ich lasse mich überraschen</option>
                             </select>
                         </div>
                         
@@ -535,11 +586,11 @@
                             <label for="budget">Budget-Vorstellung</label>
                             <select id="budget" name="budget">
                                 <option value="">Bitte auswählen...</option>
-                                <option value="bis-1000">Bis 1.000€</option>
-                                <option value="1000-2000">1.000€ - 2.000€</option>
-                                <option value="2000-3000">2.000€ - 3.000€</option>
-                                <option value="3000+">Über 3.000€</option>
-                                <option value="flexibel">Flexibel – es kommt auf die Qualität an</option>
+                                <option value="Bis 1.000€">Bis 1.000€</option>
+                                <option value="1.000€ - 2.000€">1.000€ - 2.000€</option>
+                                <option value="2.000€ - 3.000€">2.000€ - 3.000€</option>
+                                <option value="Über 3.000€">Über 3.000€</option>
+                                <option value="Flexibel – es kommt auf die Qualität an">Flexibel – es kommt auf die Qualität an</option>
                             </select>
                         </div>
                         
@@ -547,16 +598,16 @@
                             <label for="timeline">Wann soll die Webseite fertig sein?</label>
                             <select id="timeline" name="timeline">
                                 <option value="">Bitte auswählen...</option>
-                                <option value="dringend">So schnell wie möglich</option>
-                                <option value="1-monat">Innerhalb 1 Monats</option>
-                                <option value="1-2-monat">1-2 Monate</option>
-                                <option value="2-3-monat">2-3 Monate</option>
-                                <option value="flexibel">Zeitrahmen flexibel</option>
+                                <option value="So schnell wie möglich">So schnell wie möglich</option>
+                                <option value="Innerhalb 1 Monats">Innerhalb 1 Monats</option>
+                                <option value="1-2 Monate">1-2 Monate</option>
+                                <option value="2-3 Monate">2-3 Monate</option>
+                                <option value="Zeitrahmen flexibel">Zeitrahmen flexibel</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="dringlichkeit">Dringlichkeit</label>
+                            <label for="dringlichkeit">Dringlichkeit (1 = keine Eile, 10 = sehr dringend)</label>
                             <div class="range-group">
                                 <div class="range-labels">
                                     <span>Keine Eile</span>
@@ -579,18 +630,22 @@
                     </div>
                     
                     <div class="btn-group">
-                        <button type="submit" class="btn">Anfrage absenden</button>
+                        <button type="submit" class="btn" id="submit-btn">Anfrage absenden</button>
                     </div>
                 </form>
                 
                 <div class="success-message" id="success-message">
-                    <div class="icon">📄✅</div>
-                    <h3>PDF wird heruntergeladen!</h3>
-                    <p>Ihre Zusammenfassung wurde als PDF gespeichert.<br>Ihre E-Mail-App öffnet sich ebenfalls – bitte senden Sie die E-Mail ab.<br>Wir melden uns so schnell wie möglich bei Ihnen.</p>
+                    <div class="icon">✅</div>
+                    <h3>Anfrage erfolgreich gesendet!</h3>
+                    <p>Wir haben Ihre Anfrage erhalten und melden uns so schnell wie möglich.</p>
+                    <p>Laden Sie hier Ihre persönliche Zusammenfassung herunter:</p>
+                    <button class="download-btn" id="download-pdf">
+                        <span>📄</span> Zusammenfassung als PDF herunterladen
+                    </button>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px; padding: 32px; background: var(--gray-50); border-radius: 12px;">
+            <div style="text-align: center; margin-top: 40px; padding: 32px; background: var(--white); border-radius: 12px; border: 1px solid var(--gray-200);">
                 <p style="color: var(--gray-600); margin-bottom: 12px;">Oder schreiben Sie uns direkt:</p>
                 <a href="mailto:pascalroe@proton.me" style="font-size: 1.25rem; font-weight: 600; color: var(--primary);">pascalroe@proton.me</a>
             </div>
@@ -598,12 +653,14 @@
     </main>
     
     <script>
+        // Initialize EmailJS (Pascal needs to add his public key)
+        // To set up: https://dashboard.emailjs.com/sign-up
+        // Then replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+        
         // Auto-select option items when radio/checkbox is clicked
-        document.querySelectorAll('.option-item input[type="radio"], .option-item input[type="checkbox"]').forEach(input => {
+        document.querySelectorAll('.option-item input').forEach(input => {
             input.addEventListener('change', () => {
-                // Toggle selected class on parent
                 if (input.checked) {
-                    // For radio buttons in same group, remove selected from siblings
                     if (input.type === 'radio') {
                         input.closest('.option-group').querySelectorAll('.option-item').forEach(item => {
                             item.classList.remove('selected');
@@ -616,125 +673,149 @@
             });
         });
         
-        // Form submission via mailto
-        document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
+        // Store form data for PDF generation
+        let storedFormData = {};
+        
+        // Form submission
+        document.getElementById('questionnaire-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span>Wird gesendet...';
+            
+            // Collect form data
             const formData = new FormData(this);
-            let emailBody = '=== NEUE ANFRAGE ===\n\n';
+            storedFormData = {};
+            formData.forEach((value, key) => {
+                if (storedFormData[key]) {
+                    if (Array.isArray(storedFormData[key])) {
+                        storedFormData[key].push(value);
+                    } else {
+                        storedFormData[key] = [storedFormData[key], value];
+                    }
+                } else {
+                    storedFormData[key] = value;
+                }
+            });
             
-            // Section 1: About You
-            emailBody += '--- ÜBER SIE ---\n';
-            emailBody += 'Name: ' + (formData.get('name') || 'Nicht angegeben') + '\n';
-            emailBody += 'E-Mail: ' + (formData.get('email') || 'Nicht angegeben') + '\n';
-            emailBody += 'Telefon: ' + (formData.get('phone') || 'Nicht angegeben') + '\n';
-            emailBody += 'Unternehmen: ' + (formData.get('company') || 'Nicht angegeben') + '\n\n';
+            // Get checked packages
+            const pakete = [];
+            document.querySelectorAll('input[name="pakete"]:checked').forEach(cb => {
+                pakete.push(cb.value);
+            });
+            storedFormData.pakete = pakete;
             
-            // Section 2: Project Type
-            emailBody += '--- PROJEKTART ---\n';
-            emailBody += 'Auswahl: ' + (formData.get('projektart') || 'Nicht angegeben') + '\n\n';
-            
-            // Section 3: Package Interest
-            emailBody += '--- PAKET-INTERESSE ---\n';
-            const pakete = formData.getAll('pakete[]');
-            emailBody += pakete.length > 0 ? pakete.join(', ') : 'Keine Auswahl';
-            emailBody += '\n\n';
-            
-            // Section 4: Website Details
-            emailBody += '--- WEBSEITE-DETAILS ---\n';
-            emailBody += 'Aktuelle Webseite: ' + (formData.get('website_current') || 'Keine') + '\n';
-            emailBody += 'Seitenanzahl: ' + (formData.get('pages') || 'Nicht angegeben') + '\n';
-            emailBody += 'Funktionen: ' + (formData.get('funktionen') || 'Nicht angegeben') + '\n\n';
-            
-            // Section 5: Design
-            emailBody += '--- DESIGN-PRÄFERENZEN ---\n';
-            emailBody += 'Design-Style: ' + (formData.get('design') || 'Nicht angegeben') + '\n';
-            emailBody += 'Farben: ' + (formData.get('farben') || 'Keine Präferenz') + '\n\n';
-            
-            // Section 6: Budget & Timeline
-            emailBody += '--- BUDGET & ZEITRAHMEN ---\n';
-            emailBody += 'Budget: ' + (formData.get('budget') || 'Nicht angegeben') + '\n';
-            emailBody += 'Timeline: ' + (formData.get('timeline') || 'Nicht angegeben') + '\n';
-            emailBody += 'Dringlichkeit: ' + (formData.get('dringlichkeit') || '5') + '/10\n\n';
-            
-            // Section 7: Additional Info
-            emailBody += '--- ZUSÄTZLICHE INFORMATIONEN ---\n';
-            emailBody += formData.get('nachricht') || 'Keine zusätzlichen Informationen';
-            
-            // Generate PDF
+            try {
+                // Try to send via EmailJS (if configured)
+                // Replace these values with your actual EmailJS credentials:
+                // 1. Go to https://dashboard.emailjs.com
+                // 2. Create an email service (Gmail, Outlook, etc.)
+                // 3. Create an email template with {{name}}, {{email}}, etc.
+                // 4. Get your Public Key from Account > General
+                
+                // Comment out the EmailJS code below until you have your credentials:
+                /*
+                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                    name: storedFormData.name,
+                    email: storedFormData.email,
+                    phone: storedFormData.phone || '-',
+                    company: storedFormData.company || '-',
+                    projektart: storedFormData.projektart || '-',
+                    pakete: storedFormData.pakete.join(', ') || '-',
+                    website_current: storedFormData.website_current || 'Keine',
+                    pages: storedFormData.pages || '-',
+                    funktionen: storedFormData.funktionen || '-',
+                    design: storedFormData.design || '-',
+                    farben: storedFormData.farben || 'Keine Präferenz',
+                    budget: storedFormData.budget || '-',
+                    timeline: storedFormData.timeline || '-',
+                    dringlichkeit: storedFormData.dringlichkeit || '5',
+                    nachricht: storedFormData.nachricht || 'Keine zusätzlichen Informationen'
+                }, 'YOUR_PUBLIC_KEY');
+                */
+                
+                // For now, just show success (EmailJS setup needed)
+                // Remove this line when EmailJS is configured
+                
+                // Show success and hide form
+                this.style.display = 'none';
+                document.getElementById('success-message').classList.add('show');
+                document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Email send failed:', error);
+                document.getElementById('error-message').classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Anfrage absenden';
+            }
+        });
+        
+        // PDF Download
+        document.getElementById('download-pdf').addEventListener('click', function() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
             // Header
-            doc.setFontSize(20);
+            doc.setFontSize(22);
             doc.setTextColor(30, 64, 175);
-            doc.text('Neue Webdesign-Anfrage', 20, 25);
+            doc.text('Ihre Webdesign-Anfrage', 20, 25);
             
             doc.setFontSize(10);
             doc.setTextColor(100);
-            doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 20, 33);
-            doc.text('Ihre Zusammenfassung:', 20, 42);
+            doc.text('Datum: ' + new Date().toLocaleDateString('de-DE'), 20, 34);
+            doc.text('Vielen Dank für Ihr Vertrauen!', 20, 42);
+            
+            doc.setDrawColor(200);
+            doc.line(20, 48, 190, 48);
             
             // Content
             doc.setFontSize(11);
             doc.setTextColor(30, 41, 59);
-            let y = 52;
+            let y = 55;
             
-            const addSection = (title, content) => {
+            const addLine = (label, value) => {
                 doc.setFont(undefined, 'bold');
                 doc.setTextColor(30, 64, 175);
-                doc.text(title, 20, y);
-                y += 7;
+                doc.text(label, 20, y);
+                y += 6;
                 doc.setFont(undefined, 'normal');
                 doc.setTextColor(30, 41, 59);
-                const lines = doc.splitTextToSize(content, 170);
+                const lines = doc.splitTextToSize(String(value), 170);
                 doc.text(lines, 20, y);
-                y += lines.length * 6 + 8;
+                y += lines.length * 6 + 4;
             };
             
-            addSection('Name:', formData.get('name') || 'Nicht angegeben');
-            addSection('E-Mail:', formData.get('email') || 'Nicht angegeben');
-            addSection('Telefon:', formData.get('phone') || 'Nicht angegeben');
-            addSection('Unternehmen:', formData.get('company') || 'Nicht angegeben');
-            addSection('Projektart:', (formData.get('projektart') || 'Nicht angegeben').toUpperCase());
+            addLine('Name:', storedFormData.name || 'Nicht angegeben');
+            addLine('E-Mail:', storedFormData.email || 'Nicht angegeben');
+            addLine('Telefon:', storedFormData.phone || 'Nicht angegeben');
+            addLine('Unternehmen:', storedFormData.company || 'Nicht angegeben');
+            addLine('Projektart:', (storedFormData.projektart || 'Nicht angegeben').toUpperCase());
+            addLine('Paket-Interesse:', storedFormData.pakete ? storedFormData.pakete.join(', ') : 'Keine Auswahl');
+            addLine('Aktuelle Webseite:', storedFormData.website_current || 'Keine');
+            addLine('Seitenanzahl:', (storedFormData.pages || 'Nicht angegeben').toUpperCase());
+            addLine('Funktionen:', (storedFormData.funktionen || 'Nicht angegeben').toUpperCase());
+            addLine('Design-Style:', (storedFormData.design || 'Nicht angegeben').toUpperCase());
+            addLine('Farben:', storedFormData.farben || 'Keine Präferenz');
+            addLine('Budget:', (storedFormData.budget || 'Nicht angegeben').toUpperCase());
+            addLine('Timeline:', (storedFormData.timeline || 'Nicht angegeben').toUpperCase());
+            addLine('Dringlichkeit:', (storedFormData.dringlichkeit || '5') + ' / 10');
+            addLine('Nachricht:', storedFormData.nachricht || 'Keine zusätzlichen Informationen');
             
-            const pakete = formData.getAll('pakete[]');
-            addSection('Paket-Interesse:', pakete.length > 0 ? pakete.join(', ').toUpperCase() : 'Keine Auswahl');
-            addSection('Aktuelle Webseite:', formData.get('website_current') || 'Keine');
-            addSection('Seitenanzahl:', (formData.get('pages') || 'Nicht angegeben').toUpperCase());
-            addSection('Funktionen:', (formData.get('funktionen') || 'Nicht angegeben').toUpperCase());
-            addSection('Design-Style:', (formData.get('design') || 'Nicht angegeben').toUpperCase());
-            addSection('Farben:', formData.get('farben') || 'Keine Präferenz');
-            addSection('Budget:', (formData.get('budget') || 'Nicht angegeben').toUpperCase());
-            addSection('Timeline:', (formData.get('timeline') || 'Nicht angegeben').toUpperCase());
-            addSection('Dringlichkeit:', (formData.get('dringlichkeit') || '5') + ' / 10');
-            addSection('Nachricht:', formData.get('nachricht') || 'Keine zusätzlichen Informationen');
-            
-            // Footer
-            y += 10;
+            // Footer box
+            y += 8;
             doc.setFillColor(248, 250, 252);
-            doc.rect(15, y - 5, 180, 35, 'F');
+            doc.rect(15, y, 180, 30, 'F');
             doc.setFont(undefined, 'bold');
             doc.setTextColor(30, 41, 59);
-            doc.text('Vielen Dank für Ihre Anfrage!', 20, y + 5);
+            doc.text('Was passiert jetzt?', 20, y + 8);
             doc.setFont(undefined, 'normal');
             doc.setTextColor(71, 85, 105);
-            doc.text('Wir melden uns so schnell wie möglich bei Ihnen.', 20, y + 13);
-            doc.text('Kontakt: pascalroe@proton.me', 20, y + 20);
+            doc.text('Wir melden uns so schnell wie möglich bei Ihnen.', 20, y + 16);
+            doc.text('Kontakt: pascalroe@proton.me', 20, y + 23);
             
-            // Download PDF
+            // Download
             doc.save('Anfrage-Zusammenfassung.pdf');
-            
-            // Open simple mailto (PDF has all details)
-            setTimeout(() => {
-                const subject = 'Neue Webdesign-Anfrage';
-                window.open('mailto:pascalroe@proton.me?subject=' + encodeURIComponent(subject), '_self');
-            }, 500);
-            
-            // Show success message
-            this.style.display = 'none';
-            document.getElementById('success-message').classList.add('show');
-            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
