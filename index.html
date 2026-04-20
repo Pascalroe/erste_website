@@ -61,8 +61,29 @@
         }
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .logo-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .nav-links a {
             color: var(--gray-600);
@@ -179,48 +200,93 @@
         .btn-large {
             padding: 18px 48px;
             font-size: 1.1rem;
+            background: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 100%);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        .btn-large:hover,
+        .btn-large:focus {
+            background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 30%, #2563eb 60%, #0ea5e9 100%);
             color: var(--white);
-            padding: 100px 0;
+            padding: 120px 0 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
         }
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 span {
+            background: linear-gradient(90deg, #60a5fa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.95;
+            margin: 0 auto 48px;
+            opacity: 0.9;
+            line-height: 1.6;
+            color: #e2e8f0;
         }
         .hero-features {
             list-style: none;
-            max-width: 550px;
-            margin: 0 auto 40px;
+            max-width: 600px;
+            margin: 0 auto 48px;
             text-align: left;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px 24px;
+            gap: 14px 32px;
         }
         .hero-features li {
-            padding: 8px 0;
-            padding-left: 28px;
+            padding: 10px 0;
+            padding-left: 32px;
             position: relative;
             font-size: 1rem;
+            color: #cbd5e1;
         }
         .hero-features li::before {
             content: "✓";
-            color: var(--accent);
+            color: #22d3ee;
             position: absolute;
             left: 0;
             font-weight: 700;
+            font-size: 1.1rem;
         }
         
         /* Sections */
@@ -844,7 +910,10 @@
     <!-- Navigation -->
     <nav role="navigation" aria-label="Hauptnavigation">
         <div class="container">
-            <a href="index.html" class="logo">Webdesign</a>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">W</div>
+                <span class="logo-text">Webdesign</span>
+            </a>
             <div class="nav-links">
                 <a href="#auswahl">Auswahl</a>
                 <a href="#pakete">Pakete</a>
