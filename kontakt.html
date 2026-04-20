@@ -357,7 +357,7 @@
             <p class="page-subtitle">Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden.</p>
             
             <div class="form-card">
-                <form id="questionnaire-form" action="https://formspree.io/f/ihre-form-id" method="POST">
+                <form id="questionnaire-form" action="mailto:pascalroe@proton.me" method="POST" enctype="text/plain">
                     
                     <!-- Section 1: About You -->
                     <div class="form-section">
@@ -583,9 +583,9 @@
                 </form>
                 
                 <div class="success-message" id="success-message">
-                    <div class="icon">✓</div>
-                    <h3>Vielen Dank für Ihre Anfrage!</h3>
-                    <p>Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+                    <div class="icon">📧</div>
+                    <h3>Ihre E-Mail-App wurde geöffnet!</h3>
+                    <p>Bitte senden Sie die vorgefertigte E-Mail ab. Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
                 </div>
             </div>
         </div>
@@ -610,17 +610,62 @@
             });
         });
         
-        // Form submission (for demo - in production, connect to Formspree or similar)
+        // Form submission via mailto
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
-            // For now, show success message
-            // In production, remove this and let the form submit to Formspree
             e.preventDefault();
             
-            // Hide form, show success
+            const formData = new FormData(this);
+            let emailBody = '=== NEUE ANFRAGE ===\n\n';
+            
+            // Section 1: About You
+            emailBody += '--- ÜBER SIE ---\n';
+            emailBody += 'Name: ' + (formData.get('name') || 'Nicht angegeben') + '\n';
+            emailBody += 'E-Mail: ' + (formData.get('email') || 'Nicht angegeben') + '\n';
+            emailBody += 'Telefon: ' + (formData.get('phone') || 'Nicht angegeben') + '\n';
+            emailBody += 'Unternehmen: ' + (formData.get('company') || 'Nicht angegeben') + '\n\n';
+            
+            // Section 2: Project Type
+            emailBody += '--- PROJEKTART ---\n';
+            emailBody += 'Auswahl: ' + (formData.get('projektart') || 'Nicht angegeben') + '\n\n';
+            
+            // Section 3: Package Interest
+            emailBody += '--- PAKET-INTERESSE ---\n';
+            const pakete = formData.getAll('pakete[]');
+            emailBody += pakete.length > 0 ? pakete.join(', ') : 'Keine Auswahl';
+            emailBody += '\n\n';
+            
+            // Section 4: Website Details
+            emailBody += '--- WEBSEITE-DETAILS ---\n';
+            emailBody += 'Aktuelle Webseite: ' + (formData.get('website_current') || 'Keine') + '\n';
+            emailBody += 'Seitenanzahl: ' + (formData.get('pages') || 'Nicht angegeben') + '\n';
+            emailBody += 'Funktionen: ' + (formData.get('funktionen') || 'Nicht angegeben') + '\n\n';
+            
+            // Section 5: Design
+            emailBody += '--- DESIGN-PRÄFERENZEN ---\n';
+            emailBody += 'Design-Style: ' + (formData.get('design') || 'Nicht angegeben') + '\n';
+            emailBody += 'Farben: ' + (formData.get('farben') || 'Keine Präferenz') + '\n\n';
+            
+            // Section 6: Budget & Timeline
+            emailBody += '--- BUDGET & ZEITRAHMEN ---\n';
+            emailBody += 'Budget: ' + (formData.get('budget') || 'Nicht angegeben') + '\n';
+            emailBody += 'Timeline: ' + (formData.get('timeline') || 'Nicht angegeben') + '\n';
+            emailBody += 'Dringlichkeit: ' + (formData.get('dringlichkeit') || '3') + '/5\n\n';
+            
+            // Section 7: Additional Info
+            emailBody += '--- ZUSÄTZLICHE INFORMATIONEN ---\n';
+            emailBody += formData.get('nachricht') || 'Keine zusätzlichen Informationen';
+            
+            // Create mailto link
+            const subject = encodeURIComponent('Neue Webdesign-Anfrage');
+            const body = encodeURIComponent(emailBody);
+            const mailtoLink = 'mailto:pascalroe@proton.me?subject=' + subject + '&body=' + body;
+            
+            // Open email client
+            location.href = mailtoLink;
+            
+            // Show success message
             this.style.display = 'none';
             document.getElementById('success-message').classList.add('show');
-            
-            // Scroll to success message
             document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
