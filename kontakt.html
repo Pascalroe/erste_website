@@ -327,6 +327,35 @@
                 width: 100%;
             }
         }
+        
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 24px;
+            text-align: center;
+        }
+        footer a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        footer a:hover {
+            color: var(--white);
+        }
+        footer .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
@@ -586,6 +615,17 @@
             </div>
         </div>
     </main>
+    
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <a href="impressum.html">Impressum</a>
+            <a href="agb.html">AGB</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="kontakt.html">Kontakt</a>
+            <p class="copyright">&copy; 2026 quark. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
     
     <script>
         // Auto-select option items when radio/checkbox is clicked
