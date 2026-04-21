@@ -289,6 +289,28 @@
                 padding: 32px 24px;
             }
         }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        .logo-icon svg {
+            transition: transform 0.3s ease;
+        }
+        .logo-icon svg path {
+            transition: filter 0.3s ease;
+        }
+        .logo:hover .logo-icon svg {
+            transform: rotate(-8deg) scale(1.08);
+        }
+        .logo:hover .logo-icon svg path {
+            filter: drop-shadow(0 4px 12px rgba(14, 165, 233, 0.5));
+        }
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -297,7 +319,18 @@
     <!-- Navigation -->
     <nav role="navigation" aria-label="Hauptnavigation">
         <div class="container">
-            <a href="index.html" class="logo">fudora</a>
+            <a href="index.html" class="logo"><svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#22d3ee"/>
+                            <stop offset="100%" stop-color="#0ea5e9"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" fill="url(#logoGrad)" opacity="0.15"/>
+                    <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M14 16H26M14 20H24M14 24H22" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="27" cy="16" r="3" fill="url(#logoGrad)"/>
+                </svg><span class="logo-text">fudora</span></a>
             <div class="nav-links">
                 <a href="index.html#auswahl">Auswahl</a>
                 <a href="index.html#pakete">Pakete</a>
