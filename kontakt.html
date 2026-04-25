@@ -431,6 +431,12 @@
             <div class="form-card">
                 <form id="questionnaire-form" action="https://formspree.io/f/xpwzgqvd" method="POST">
                     
+                    <div id="paket- info" style="display:none; background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.3); border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; text-align: center;">
+                        <p style="margin:0; font-size: 0.95rem; color: #94a3b8;">
+                            Sie interessieren sich für das <strong id="paket- name" style="color: #e2e8f0;"></strong> — super Wahl! Erwähnen Sie es gerne in Ihrer Nachricht.
+                        </p>
+                    </div>
+                    
                     <!-- Section 1: About You -->
                     <div class="form-section">
                         <h3>1. Über Sie</h3>
@@ -453,7 +459,7 @@
                         
                         <div class="form-group">
                             <label for="company">Unternehmen / Branche</label>
-                            <input type="text" id="company" name="company" placeholder="z.B. Elektrotechnik, Gastro, Dienstleistung">
+                            <input type="text" id="company" name="company" placeholder="z.B. Elektrotechnik, Gastro, Dienstleistung"><input type="hidden" id="paket" name="paket">
                         </div>
                     </div>
                     
@@ -762,6 +768,22 @@
                 document.getElementById('success-message').classList.add('show');
             }
         });
+    </script>
+
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var paket = params.get('paket');
+        if (paket) {
+            var field = document.getElementById('paket');
+            if (field) field.value = paket;
+            var nameMap = {'basis': 'Basis-Paket (690€)', 'standard': 'Standard-Paket (1.290€)', 'premium': 'Premium-Paket (2.490€)'};
+            var displayName = nameMap[paket] || (paket.charAt(0).toUpperCase() + paket.slice(1));
+            var info = document.getElementById('paket-info');
+            var nameEl = document.getElementById('paket-name');
+            if (info && nameEl) { nameEl.textContent = displayName; info.style.display = 'block'; }
+        }
+    })();
     </script>
 </body>
 </html>
