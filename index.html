@@ -1512,6 +1512,14 @@
                 max- width: 50%;
                 margin: 0 auto;
             }
+            .pricing- grid {
+                grid- template- columns: repeat(2, 1fr);
+            }
+            .pricing- grid > .pricing- card: nth- child(3) {
+                grid- column: 1 / -1;
+                max- width: 50%;
+                margin: 0 auto;
+            }
         }
 
         @media (max-width: 600px) {
