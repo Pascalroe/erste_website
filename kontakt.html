@@ -676,8 +676,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 40px; padding: 32px; background: var(--white); border-radius: 12px; border: 1px solid var(--gray-200);">
-                <p style="color: var(--gray-600); margin-bottom: 12px;">Oder schreiben Sie uns direkt:</p>
-                <a href="mailto:pascalroe@proton.me" style="font-size: 1.25rem; font-weight: 600; color: var(--primary);">pascalroe@proton.me</a>
+                <p style="color: var(--gray-600); margin-bottom: 12px;">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
             </div>
         </div>
     </main>
@@ -762,10 +761,6 @@
                 if (pakete.length > 0) {
                     emailBody += 'Pakete: ' + pakete.join(', ') + '\n';
                 }
-                
-                const subject = encodeURIComponent('Neue fudora-Anfrage');
-                const body = encodeURIComponent(emailBody);
-                window.location.href = 'mailto:pascalroe@proton.me?subject=' + subject + '&body=' + body;
                 
                 form.style.display = 'none';
                 document.getElementById('success-message').classList.add('show');

@@ -300,7 +300,10 @@
             <p>Erzählen Sie uns von Ihrer aktuellen Website und Ihren Zielen.</p>
         </div>
         
-        <form id="relaunch-form" action="#" method="POST">
+        <form id="relaunch-form" action="https://formsubmit.co/pascalroe@proton.me" method="POST">
+            <input type="hidden" name="_subject" value="Neue Relaunch-Anfrage von fudora">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="danke.html">
             <!-- Section 1: Current Website -->
             <div class="form-section">
                 <h3>1. Ihre aktuelle Website</h3>
@@ -565,10 +568,6 @@
             
             emailBody += '8. WEITERE INFORMATIONEN\n';
             emailBody += formData.get('nachricht') || 'Keine Angabe' + '\n';
-            
-            const subject = encodeURIComponent('Neue Relaunch-Anfrage - fudora');
-            const body = encodeURIComponent(emailBody);
-            window.location.href = 'mailto:pascalroe@proton.me?subject=' + subject + '&body=' + body;
             
             this.style.display = 'none';
             document.getElementById('success-message').classList.add('show');
