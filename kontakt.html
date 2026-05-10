@@ -429,7 +429,7 @@
             <p class="page-subtitle">Erzählen Sie uns von Ihrem Projekt – wir melden uns so schnell wie möglich.</p>
             
             <div class="form-card">
-<form action="https://fudora-form.pascalroe.workers.dev" method="POST">
+<form id="questionnaire-form" action="https://fudora-form.pascalroe.workers.dev" method="POST">
                     <input type="hidden" name="_subject" value="Neue Anfrage von fudora">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_next" value="danke.html">
@@ -732,8 +732,8 @@
             submitBtn.textContent = 'Wird gesendet...';
             
             try {
-                // Deine Cloudflare Worker URL hier eintragen
-                const workerUrl = 'https://kontakt-formular.your-subdomain.workers.dev';
+                // Cloudflare Worker URL
+                const workerUrl = 'https://fudora-form.pascalroe.workers.dev';
                 
                 const response = await fetch(workerUrl, {
                     method: 'POST',

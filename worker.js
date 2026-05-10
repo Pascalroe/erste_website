@@ -109,15 +109,18 @@ export default {
 </html>`;
 
       // E-Mail über Resend senden
+      const RESEND_KEY = "re_CkvsteVj_9iE8Ad4TmXPo3c4uRAieC5ch";
+      const TO_EMAIL = "pascalroe@proton.me";
+      
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+          "Authorization": `Bearer ${RESEND_KEY}`,
         },
         body: JSON.stringify({
           from: "fudora.de <noreply@resend.dev>",
-          to: env.TO_EMAIL,
+          to: TO_EMAIL,
           reply_to: email,
           subject: `Neue Anfrage von ${name} - fudora.de`,
           html: emailHtml,
