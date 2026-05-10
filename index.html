@@ -14,11 +14,11 @@
             box-sizing: border-box;
         }
         :root {
-            --primary: #1e40af;
-            --primary-dark: #1e3a8a;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
             --primary-light: #3b82f6;
             --accent: #0ea5e9;
-            --accent-light: #22d3ee;
+            --accent-light: #38bdf8;
             --white: #ffffff;
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
@@ -26,20 +26,20 @@
             --gray-300: #cbd5e1;
             --gray-400: #94a3b8;
             --gray-600: #475569;
-            --gray-800: #1e293b;
-            --gray-900: #0f172a;
+            --gray-800: #f8fafc;
+            --gray-900: #ffffff;
             --success: #10b981;
         }
         html {
             scroll-behavior: smooth;
         }
         body {
-  position: relative;
-  z-index: 1;
+            position: relative;
+            z-index: 1;
             font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
-            color: var(--gray-800);
-            background: var(--white);
+            color: #1e293b;
+            background: #f8fafc;
             overflow-x: hidden;
         }
         .container {
@@ -199,7 +199,7 @@
             display: block;
             width: 100%;
             height: 2.5px;
-            background: var(--gray-800);
+            background: #ffffff;
             border-radius: 3px;
             transition: all 0.3s ease;
         }
@@ -260,18 +260,18 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: var(--white);
             padding: 14px 32px;
             border-radius: 12px;
-            font-size: 1rem;
             font-weight: 600;
+            letter-spacing: 0.02em;
             transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
         .btn::before {
             content: '';
@@ -461,13 +461,13 @@
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: #1e293b;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
         .section-subtitle {
             text-align: center;
-            color: var(--gray-600);
+            color: #64748b;
             max-width: 600px;
             margin: 0 auto 60px;
             font-size: 1.15rem;
@@ -475,7 +475,7 @@
 
         /* Choice Section */
         .choice {
-            background: var(--white);
+            background: #ffffff;
             padding: 100px 0;
         }
         .choice-grid {
@@ -486,11 +486,12 @@
             margin: 60px auto 0;
         }
         .choice-card {
-            background: var(--gray-50);
+            background: #ffffff;
             border-radius: 24px;
             padding: 52px 44px;
             text-align: left;
-            border: 1px solid var(--gray-200);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             display: flex;
@@ -539,11 +540,11 @@
         .choice-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: #1e293b;
             margin-bottom: 12px;
         }
         .choice-card p {
-            color: var(--gray-600);
+            color: #475569;
             margin-bottom: 28px;
             font-size: 1rem;
             line-height: 1.7;
@@ -585,11 +586,12 @@
             margin: 0 auto;
         }
         .pricing-card {
-            background: var(--white);
+            background: #ffffff;
             border-radius: 24px;
             padding: 40px 32px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
@@ -693,6 +695,14 @@
         }
         .pricing-card .pricing-cta {
             margin-top: 24px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .pricing-card .pricing-cta .btn {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 0.9rem;
         }
         .pricing-card.featured .pricing-cta .btn {
             background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
@@ -701,7 +711,7 @@
 
         /* Wartung */
         .wartung {
-            background: var(--white);
+            background: #ffffff;
         }
         .wartung-subsection {
             margin-bottom: 60px;
@@ -734,7 +744,7 @@
             margin: 0 auto;
         }
         .maintenance-card {
-            background: var(--white);
+            background: #ffffff;
             border-radius: 24px;
             padding: 40px 32px;
             text-align: center;
@@ -992,9 +1002,9 @@
         }
         .ss-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            max-width: 950px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
             margin: 50px auto 0;
         }
         .ss-card {
@@ -1172,7 +1182,7 @@
 
         /* Warum */
         .warum {
-            background: var(--white);
+            background: #ffffff;
             position: relative;
         }
         .why-grid {
@@ -1183,7 +1193,7 @@
             margin: 50px auto 0;
         }
         .why-card {
-            background: var(--white);
+            background: #ffffff;
             border-radius: 24px;
             padding: 36px 28px;
             text-align: center;
@@ -1356,8 +1366,8 @@
 
         /* Footer */
         footer {
-            background: var(--gray-900);
-            color: var(--gray-400);
+            background: #1e3a8a;
+            color: #e2e8f0;
             padding: 56px 0;
         }
         footer .container {
@@ -1495,26 +1505,98 @@
             }
             .section-title {
                 font-size: 2rem;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%);
+            color: var(--white);
+            padding: 140px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 28px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #22d3ee 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.35rem;
+            opacity: 0.92;
+            margin-bottom: 48px;
+            max-width: 700px;
+            text-align: center;
+            line-height: 1.7;
+        }
+        .hero-trust {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        .hero-trust .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 28px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .hero-trust .trust-item .num {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #22d3ee;
+            display: block;
+        }
+        .hero-trust .trust-item .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-actions .btn-large {
+            padding: 18px 42px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-trust {
+                gap: 16px;
+            }
+            .hero-trust .trust-item {
+                padding: 14px 20px;
+                min-width: 120px;
             }
         }
-        @media (max-width: 600px) {
-            nav .container {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-            .nav-links {
-                display: none;
-            }
-            .burger {
-                display: flex;
-            }
-            .hero {
-                padding: 100px 0 70px;
-            }
-            .hero h1 {
-                font-size: 2rem;
-                letter-spacing: -0.02em;
-            }
             .hero-subtitle {
                 font-size: 1.1rem;
             }
@@ -1814,7 +1896,7 @@
             <div class="nav-links">
                 <a href="#auswahl">Auswahl</a>
                 <a href="#pakete">Pakete</a>
-                <a href="#wartung">Wartung</a>
+                <a href="#self-service">Hosting</a>
                 <a href="#prozess">Prozess</a>
                 <a href="#faq">FAQ</a>
                 <a href="mailto:pascalroe@proton.me" class="highlight-link">Kontakt</a>
@@ -1841,12 +1923,12 @@
     <header class="hero">
         <div class="container">
 
-            <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 24px; background: linear-gradient(135deg, #fff 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <h1>
                 Ohne laufende Kosten.<br>
                 Volle Kontrolle.<br>
                 Persönliche Betreuung.
             </h1>
-            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 40px; max-width: 600px;">
+            <p>
                 Wir erstellen Ihre Website und übergeben alle Dateien. 
                 Kein Abo, keine versteckten Kosten. Sie besitzen Ihre Website komplett.
             </p>
@@ -1935,6 +2017,9 @@
                             <li>Übergabe aller Dateien</li>
                         </ul>
                         <div class="pricing-cta">
+                            <a href="kontakt.html" class="btn">Jetzt anfragen</a>
+                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
+                        </div>
                     </article>
 
                     <!-- Standard -->
@@ -1958,6 +2043,8 @@
                             <li>2 Revisionsrunden inklusive</li>
                         </ul>
                         <div class="pricing-cta">
+                            <a href="kontakt.html" class="btn">Jetzt anfragen</a>
+                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
                         </div>
                     </article>
 
@@ -1982,79 +2069,10 @@
                             <li>3 Revisionsrunden inklusive</li>
                         </ul>
                         <div class="pricing-cta">
+                            <a href="kontakt.html" class="btn">Jetzt anfragen</a>
+                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
                         </div>
                     </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Wartung Section -->
-        <section class="wartung" id="wartung" aria-labelledby="wartung-title">
-            <div class="container">
-                <h2 id="wartung-title" class="section-title">Wartung & Betreuung</h2>
-
-                <div class="wartung-subsection">
-                    <h3 class="subsection-title">Wartung & Hosting</h3>
-                    <div class="maintenance-grid">
-                        <article class="maintenance-card animate-on-scroll">
-                            <h4>Essenziell</h4>
-                            <div class="price">19€ <span>/Monat</span></div>
-                            <ul class="features-preview">
-                                <li>Hosting-Betreuung</li>
-                                <li>Domain-Management</li>
-                                <li>SSL automatisch</li>
-                            </ul>
-                            <ul>
-                                <li>Hosting-Betreuung (Cloudflare)</li>
-                                <li>Domain-Verlängerungs-Management</li>
-                                <li>SSL-Zertifikate automatisch</li>
-                                <li>Erreichbarkeits-Monitoring</li>
-                                <li>Jährlicher Sicherheits-Check</li>
-                            </ul>
-                            <button class="btn btn-outline" onclick="toggleDetails(this)">Mehr erfahren</button>
-                        </article>
-
-                        <article class="maintenance-card animate-on-scroll delay-1">
-                            <h4>Pflege</h4>
-                            <div class="price">29€ <span>/Monat</span></div>
-                            <ul class="features-preview">
-                                <li>Alles aus Essenziell</li>
-                                <li>2 Änderungen/Monat</li>
-                                <li>Support 48h</li>
-                            </ul>
-                            <ul>
-                                <li>Alles aus Essenziell</li>
-                                <li>2 kleine Änderungen pro Monat</li>
-                                <li>Jährlicher Funktions-Check</li>
-                                <li>E-Mail-Support binnen 48h</li>
-                            </ul>
-                            <button class="btn btn-outline" onclick="toggleDetails(this)">Mehr erfahren</button>
-                        </article>
-
-                        <article class="maintenance-card animate-on-scroll delay-2">
-                            <h4>Aktiv</h4>
-                            <div class="price">59€ <span>/Monat</span></div>
-                            <ul class="features-preview">
-                                <li>Alles aus Pflege</li>
-                                <li>5 Änderungen/Monat</li>
-                                <li>Support 24h</li>
-                            </ul>
-                            <ul>
-                                <li>Alles aus Pflege</li>
-                                <li>Bis zu 5 Änderungen pro Monat</li>
-                                <li>Neue Referenzprojekte einpflegen</li>
-                                <li>Quartalsweiser SEO-Check</li>
-                                <li>Priorisierter Support binnen 24h</li>
-                            </ul>
-                            <button class="btn btn-outline" onclick="toggleDetails(this)">Mehr erfahren</button>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="cta-box animate-on-scroll">
-                    <h3>Fragen zu den Paketen?</h3>
-                    <p>Schreiben Sie uns - wir beraten Sie gerne und finden das perfekte Paket für Sie.</p>
-                    <a href="kontakt.html" class="btn">Kostenlos beraten lassen</a>
                 </div>
             </div>
         </section>
@@ -2101,7 +2119,7 @@
         <!-- Self-Service Section -->
         <section class="self-service" id="self-service" aria-labelledby="selfservice-title">
             <div class="container">
-                <h2 id="selfservice-title" class="section-title">Eigenregie & Hosting-Partner</h2>
+                <h2 id="selfservice-title" class="section-title">Hosting</h2>
                 <p class="section-subtitle">Sie bevorzugen den Do-it-yourself-Ansatz oder möchten nur bestimmte Leistungen? Wir haben passende Optionen.</p>
 
                 <div class="ss-grid">
@@ -2129,16 +2147,36 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4 4 0 0 1 4 4v2a.5.5 0 0 1-1 0V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a.5.5 0 0 0-1 0V15a4 4 0 0 1-4 4h-2.25M2.25 15a4 4 0 0 0 4 4h12.5M2.25 15v2.25m13.5-9v2.25M7.5 15v2.25m13.5-9v2.25" />
                             </svg>
                         </div>
-                        <h4>Hosting-Partner</h4>
-                        <div class="ss-price">19–24€ <span>/Monat</span></div>
-                        <p class="ss-desc">Wir hosten für Sie – inklusive kleinerer Änderungen.</p>
+                        <h4>Hosting (jährlich)</h4>
+                        <div class="ss-price" style="color: #22d3ee;">19,90€ <span>/Monat</span></div>
+                        <p class="ss-desc">Wir hosten für Sie – inklusive kleinerer Änderungen. Mindestlaufzeit 12 Monate.</p>
                         <ul>
-                            <li>Jährlich (19€) oder monatlich (24€)</li>
+                            <li>19,90€ pro Monat (bei jährlicher Zahlung)</li>
+                            <li>Monatlich kündbar nach 12 Monaten</li>
                             <li>Cloudflare-Hosting inklusive</li>
                             <li>Bis zu 2 kleine Änderungen pro Monat</li>
                             <li>Umsetzung innerhalb 48h</li>
                         </ul>
-                        <a href="mailto:pascalroe@proton.me?subject=Hosting-Partner%20Anfrage" class="btn ss-btn-primary">Hosting starten</a>
+                        <a href="mailto:pascalroe@proton.me?subject=Hosting%20j%C3%A4hrlich%20Anfrage" class="btn ss-btn-primary">Hosting starten</a>
+                    </article>
+
+                    <article class="ss-card animate-on-scroll delay-2">
+                        <div class="ss-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4 4 0 0 1 4 4v2a.5.5 0 0 1-1 0V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a.5.5 0 0 0-1 0V15a4 4 0 0 1-4 4h-2.25M2.25 15a4 4 0 0 0 4 4h12.5M2.25 15v2.25m13.5-9v2.25M7.5 15v2.25m13.5-9v2.25" />
+                            </svg>
+                        </div>
+                        <h4>Hosting (monatlich)</h4>
+                        <div class="ss-price" style="color: #f472b6;">29,90€ <span>/Monat</span></div>
+                        <p class="ss-desc">Flexible Lösung – jederzeit kündbar.</p>
+                        <ul>
+                            <li>29,90€ pro Monat</li>
+                            <li>Jederzeit monatlich kündbar</li>
+                            <li>Cloudflare-Hosting inklusive</li>
+                            <li>Bis zu 2 kleine Änderungen pro Monat</li>
+                            <li>Umsetzung innerhalb 48h</li>
+                        </ul>
+                        <a href="mailto:pascalroe@proton.me?subject=Hosting%20monatlich%20Anfrage" class="btn ss-btn-primary">Hosting starten</a>
                     </article>
                 </div>
 
@@ -2208,7 +2246,7 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 48px;">
-                    <a href="faq.html" class="btn btn-large animate-on-scroll" style="background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%); box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);">Alle FAQs ansehen →</a>
+                    <a href="faq.html" class="btn btn-large animate-on-scroll">Alle FAQs ansehen →</a>
                 </div>
             </div>
         </section>
