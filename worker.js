@@ -1,18 +1,6 @@
-/**
- * Cloudflare Worker für Kontaktformular
- * 
- * Einrichtung:
- * 1. Cloudflare Dashboard → Workers & Pages → Create Application → Create Worker
- * 2. Diesen Code einfügen und Deployen
- * 3. Die Worker-URL in kontakt.html eintragen (fetch-Ziel)
- * 
- * TEST-MODUS: E-Mails werden nur geloggt, nicht gesendet
- * Wenn du eine Domain hast, unten die Kommentare entfernen
- */
-
 export default {
-  async fetch(request, env) {
-    // CORS Preflight
+  async fetch(request, env, ctx) {
+    // Nur POST-Anfragen erlauben
     if (request.method === "OPTIONS") {
       return new Response(null, {
         headers: {
@@ -23,134 +11,142 @@ export default {
       });
     }
 
-    // Nur POST erlauben
     if (request.method !== "POST") {
       return new Response("Method not allowed", { status: 405 });
     }
 
     try {
       const formData = await request.formData();
-
-      // Formular-Felder auslesen
+      
+      // Daten aus dem Formular sammeln
       const name = formData.get("name") || "Nicht angegeben";
-      const email = formData.get("email");
-      const phone = formData.get("phone") || "Nicht angegeben";
-      const company = formData.get("company") || "Nicht angegeben";
+      const email = formData.get("email") || "Nicht angegeben";
+      const telefon = formData.get("telefon") || "Nicht angegeben";
+      const firma = formData.get("firma") || "Nicht angegeben";
       const projektart = formData.get("projektart") || "Nicht angegeben";
-      const nachricht = formData.get("nachricht") || "Keine Nachricht";
-      const dringlichkeit = formData.get("dringlichkeit") || "5";
-      
-      // Pakete (Checkboxen) - können mehrere sein
-      const pakete = formData.getAll("pakete");
-      const paketeText = pakete.length > 0 ? pakete.join(", ") : "Keine ausgewählt";
-      
-      // Weitere Felder
-      const websiteCurrent = formData.get("website_current") || "Keine";
-      const pages = formData.get("pages") || "Nicht angegeben";
+      const aktuelleSeite = formData.get("aktuelle-seite") || "Keine";
+      const seiten = formData.get("seiten") || "Nicht angegeben";
       const funktionen = formData.get("funktionen") || "Nicht angegeben";
       const design = formData.get("design") || "Nicht angegeben";
       const farben = formData.get("farben") || "Nicht angegeben";
       const budget = formData.get("budget") || "Nicht angegeben";
-      const timeline = formData.get("timeline") || "Nicht angegeben";
+      const zeitrahmen = formData.get("zeitrahmen") || "Nicht angegeben";
+      const nachricht = formData.get("nachricht") || "Keine Nachricht";
 
-      // Validate email
-      if (!email || !email.includes("@")) {
-        return new Response(JSON.stringify({ error: "Ungültige E-Mail-Adresse" }), {
-          status: 400,
+      // Pakete sammeln
+      const pakete = [];
+      if (formData.get("paket-basis")) pakete.push("Basis (690€)");
+      if (formData.get("paket-standard")) pakete.push("Standard (1.290€)");
+      if (formData.get("paket-premium")) pakete.push("Premium (2.490€)");
+      if (formData.get("paket-wartung")) pakete.push("Wartung & Betreuung");
+      if (formData.get("paket-unsicher")) pakete.push("Unsicher");
+      const paketeText = pakete.length > 0 ? pakete.join(", ") : "Keine Pakete ausgewählt";
+
+      // E-Mail-Inhalt erstellen
+      const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 600px; margin: 0 auto; padding: 20px; }
+    h1 { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px; }
+    h2 { color: #334155; margin-top: 20px; }
+    .field { margin-bottom: 12px; }
+    .label { font-weight: 600; color: #475569; }
+    .value { color: #1e293b; }
+    .section { background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0; }
+  </style>
+</head>
+<body>
+  <h1>📬 Neue Anfrage von fudora.de</h1>
+  
+  <div class="section">
+    <h2>👤 Über Sie</h2>
+    <div class="field"><span class="label">Name:</span> <span class="value">${name}</span></div>
+    <div class="field"><span class="label">E-Mail:</span> <span class="value">${email}</span></div>
+    <div class="field"><span class="label">Telefon:</span> <span class="value">${telefon}</span></div>
+    <div class="field"><span class="label">Firma/Branche:</span> <span class="value">${firma}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Projektart</h2>
+    <div class="field"><span class="value">${projektart}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>📦 Interessante Pakete</h2>
+    <div class="field"><span class="value">${paketeText}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>🔍 Details</h2>
+    <div class="field"><span class="label">Aktuelle Webseite:</span> <span class="value">${aktuelleSeite}</span></div>
+    <div class="field"><span class="label">Geschätzte Seiten:</span> <span class="value">${seiten}</span></div>
+    <div class="field"><span class="label">Gewünschte Funktionen:</span> <span class="value">${funktionen}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>🎨 Design</h2>
+    <div class="field"><span class="label">Stil:</span> <span class="value">${design}</span></div>
+    <div class="field"><span class="label">Farbvorlieben:</span> <span class="value">${farben}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>💰 Budget & Zeit</h2>
+    <div class="field"><span class="label">Budget:</span> <span class="value">${budget}</span></div>
+    <div class="field"><span class="label">Zeitrahmen:</span> <span class="value">${zeitrahmen}</span></div>
+  </div>
+
+  <div class="section">
+    <h2>💬 Nachricht</h2>
+    <p>${nachricht}</p>
+  </div>
+
+  <p style="color: #64748b; font-size: 12px; margin-top: 30px;">
+    Diese E-Mail wurde automatisch von fudora.de generiert.
+  </p>
+</body>
+</html>`;
+
+      // E-Mail über Resend senden
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "fudora.de <noreply@resend.dev>",
+          to: env.TO_EMAIL,
+          reply_to: email,
+          subject: `Neue Anfrage von ${name} - fudora.de`,
+          html: emailHtml,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("Resend error:", error);
+        return new Response(JSON.stringify({ error: "Failed to send email" }), {
+          status: 500,
           headers: { "Content-Type": "application/json" },
         });
       }
 
-      // === 1. E-Mail an dich (Pascal) - TEST-MODUS ===
-      const adminEmailBody = `
-Neue Anfrage über Kontaktformular
-===================================
-
-KONTAKTDATEN
-------------
-Name: ${name}
-E-Mail: ${email}
-Telefon: ${phone}
-Firma: ${company}
-
-PROJEKTDETAILS
--------------
-Projektart: ${projektart}
-Gewählte Pakete: ${paketeText}
-
-Aktuelle Website: ${websiteCurrent}
-Seitenanzahl: ${pages}
-Funktionsumfang: ${funktionen}
-Design-Präferenz: ${design}
-Wunschfarben: ${farben}
-Budget: ${budget}
-Timeline: ${timeline}
-
-DRINGLICHKEIT
--------------
-${dringlichkeit}/10
-
-NACHRICHT
---------
-${nachricht}
-      `.trim();
-
-      // --- EMAIL SENDEN: Kommentar entfernen wenn Domain aktiv ---
-      /*
-      await fetch("https://api.mailchannels.net/tx/v1/send", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: "DEINE@EMAIL.DE" }],
-              subject: `Neue Anfrage von ${name}`,
-            },
-          ],
-          from: { email: "noreply@DEINE-DOMAIN.DE" },
-          content: [
-            {
-              type: "text/plain",
-              value: adminEmailBody,
-            },
-          ],
-        }),
+      // Erfolgreich - Weiterleitung zur Danke-Seite
+      return new Response(null, {
+        status: 302,
+        headers: {
+          "Location": "/danke.html",
+        },
       });
-      */
-      
-      // Stattdessen: Log fürs Testen (siehe Cloudflare Dashboard → Logs)
-      console.log("=== NEUE ANFRAGE ===", {
-        name, email, phone, company,
-        projektart, paketeText, nachricht, dringlichkeit
-      });
-
-      // === 2. Automatische Bestätigung an Kunden - TEST-MODUS ===
-      // --- EMAIL SENDEN: Kommentar entfernen wenn Domain aktiv ---
-      /*
-      const customerEmailBody = `...`;
-      await fetch("https://api.mailchannels.net/tx/v1/send", { ... });
-      */
-      
-      console.log("=== AUTO-ANTWORT WÜRDE AN ===", email);
-
-      // Erfolgsantwort
-      return new Response(
-        JSON.stringify({ success: true, message: "Nachricht gesendet!" }),
-        {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
 
     } catch (error) {
-      console.error("Form submission error:", error);
-      return new Response(
-        JSON.stringify({ error: "Fehler beim Senden. Bitte später erneut versuchen." }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
-      );
+      console.error("Error:", error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
     }
   },
 };
