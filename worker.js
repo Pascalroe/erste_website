@@ -119,7 +119,7 @@ export default {
           "Authorization": `Bearer ${RESEND_KEY}`,
         },
         body: JSON.stringify({
-          from: "fudora.de <noreply@resend.dev>",
+          from: "onboarding@resend.dev",
           to: TO_EMAIL,
           reply_to: email,
           subject: `Neue Anfrage von ${name} - fudora.de`,
@@ -130,7 +130,12 @@ export default {
       if (!response.ok) {
         const error = await response.text();
         console.error("Resend error:", error);
-        return new Response(JSON.stringify({ error: "Failed to send email" }), {
+        // Debug: Return error details
+        return new Response(JSON.stringify({ 
+          error: "Failed to send email",
+          details: error,
+          status: response.status
+        }), {
           status: 500,
           headers: { "Content-Type": "application/json" },
         });
