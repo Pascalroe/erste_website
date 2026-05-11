@@ -275,10 +275,8 @@
             min-height: 48px;
             border: none;
             cursor: pointer;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            position: relative;
+            overflow: hidden;
         }
         .btn::before {
             content: '';
@@ -289,6 +287,11 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s ease;
+            pointer-events: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
         .btn:hover::before {
             left: 100%;
@@ -482,8 +485,15 @@
 
         /* Choice Section */
         .choice {
-            background: #ffffff;
+            background: #0f172a;
             padding: 100px 0;
+            color: var(--white);
+        }
+        .choice .section-title {
+            color: var(--white);
+        }
+        .choice .section-subtitle {
+            color: #94a3b8;
         }
         .choice-grid {
             display: grid;
@@ -491,14 +501,14 @@
             gap: 32px;
             max-width: 1100px;
             margin: 60px auto 0;
+            margin: 60px auto 0;
         }
         .choice-card {
-            background: #ffffff;
+            background: #1e293b;
             border-radius: 24px;
             padding: 52px 44px;
             text-align: left;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #334155;
             transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             display: flex;
@@ -521,41 +531,44 @@
         }
         .choice-card:hover {
             border-color: transparent;
-            box-shadow: 0 24px 60px rgba(30, 64, 175, 0.12);
+            box-shadow: 0 24px 60px rgba(30, 64, 175, 0.35);
             transform: translateY(-8px);
         }
         .choice-card .card-icon {
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: rgba(37, 99, 235, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            flex-shrink: 0;
-            transition: transform 0.4s ease;
-        }
-        .choice-card:hover .card-icon {
-            transform: scale(1.08) rotate(-3deg);
+            margin-bottom: 20px;
         }
         .choice-card .card-icon svg {
             width: 28px;
             height: 28px;
-            color: white;
+            stroke: #60a5fa;
         }
         .choice-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--white);
             margin-bottom: 12px;
         }
         .choice-card p {
-            color: #475569;
-            margin-bottom: 28px;
             font-size: 1rem;
-            line-height: 1.7;
-            flex-grow: 1;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        .choice-card .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: auto;
+            padding-top: 20px;
         }
 
         /* Pakete */
@@ -564,6 +577,7 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
+            padding: 50px 0;
         }
         .pakete::before {
             content: '';
@@ -578,24 +592,30 @@
         .pakete .container {
             position: relative;
             z-index: 1;
+            max-width: 1050px;
         }
         .pakete .section-title {
             color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 12px;
         }
         .pakete .section-subtitle {
             color: #94a3b8;
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto 30px;
         }
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            max-width: 1150px;
+            gap: 36px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .pricing-card {
             background: #ffffff;
-            border-radius: 24px;
-            padding: 40px 32px;
+            border-radius: 20px;
+            padding: 24px 20px;
             text-align: center;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -604,6 +624,13 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            min-height: 480px;
+        }
+        .pricing-card ul {
+            flex-grow: 1;
+        }
+        .pricing-card .btn {
+            margin-top: auto;
         }
         .pricing-card::before {
             content: '';
@@ -857,11 +884,11 @@
 
         .cta-box {
             text-align: center;
-            margin-top: 60px;
-            padding: 50px;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+            margin-top: 40px;
+            padding: 36px;
+            background: #1e293b;
             border-radius: 24px;
-            border: 1px solid var(--gray-200);
+            border: 1px solid #334155;
             position: relative;
             overflow: hidden;
         }
@@ -875,15 +902,15 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
         .cta-box h3 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 12px;
+            color: var(--white);
+            margin-bottom: 10px;
         }
         .cta-box p {
-            color: var(--gray-600);
-            margin-bottom: 24px;
-            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
 
         /* Prozess */
@@ -1023,6 +1050,16 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 520px;
+        }
+        .ss-card ul {
+            flex-grow: 1;
+        }
+        .ss-card .ss-btn,
+        .ss-card .ss-btn-primary {
+            margin-top: auto;
         }
         .ss-card::before {
             content: '';
@@ -1140,12 +1177,12 @@
         .ss-ultimate {
             display: flex;
             align-items: center;
-            gap: 28px;
-            max-width: 950px;
-            margin: 48px auto 0;
+            gap: 24px;
+            max-width: 800px;
+            margin: 40px auto 0;
             background: rgba(255,255,255,0.08);
-            border-radius: 24px;
-            padding: 36px 44px;
+            border-radius: 20px;
+            padding: 28px 32px;
             border: 1px solid rgba(14, 165, 233, 0.3);
             transition: all 0.35s ease;
         }
@@ -1155,8 +1192,8 @@
             box-shadow: 0 16px 50px rgba(14, 165, 233, 0.15);
         }
         .ss-ultimate-icon {
-            width: 64px;
-            height: 64px;
+            width: 52px;
+            height: 52px;
             background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
             border-radius: 50%;
             display: flex;
@@ -1166,22 +1203,22 @@
             box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4);
         }
         .ss-ultimate-icon svg {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             color: white;
         }
         .ss-ultimate-text {
             flex-grow: 1;
         }
         .ss-ultimate-text h3 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--white);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .ss-ultimate-text p {
             color: #94a3b8;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         .ss-ultimate .ss-btn-primary {
             flex-shrink: 0;
@@ -1189,8 +1226,15 @@
 
         /* Warum */
         .warum {
-            background: #ffffff;
+            background: #0f172a;
+            color: var(--white);
             position: relative;
+        }
+        .warum .section-title {
+            color: var(--white);
+        }
+        .warum .section-subtitle {
+            color: #94a3b8;
         }
         .why-grid {
             display: grid;
@@ -1200,11 +1244,11 @@
             margin: 50px auto 0;
         }
         .why-card {
-            background: #ffffff;
+            background: #1e293b;
             border-radius: 24px;
             padding: 36px 28px;
             text-align: center;
-            border: 1px solid var(--gray-200);
+            border: 1px solid #334155;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -1226,7 +1270,7 @@
         }
         .why-card:hover {
             border-color: transparent;
-            box-shadow: 0 24px 60px rgba(30, 64, 175, 0.12);
+            box-shadow: 0 24px 60px rgba(30, 64, 175, 0.35);
             transform: translateY(-8px);
         }
         .why-icon {
@@ -1236,12 +1280,12 @@
         .why-title {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--white);
             margin-bottom: 10px;
         }
         .why-desc {
             font-size: 0.92rem;
-            color: var(--gray-600);
+            color: #94a3b8;
             line-height: 1.7;
         }
 
@@ -1373,9 +1417,9 @@
 
         /* Footer */
         footer {
-            background: #1e3a8a;
+            background: #0f172a;
             color: #e2e8f0;
-            padding: 56px 0;
+            padding: 48px 0;
         }
         footer .container {
             display: flex;
@@ -2444,7 +2488,7 @@
                             </svg>
                         </div>
                         <h4>Hosting (monatlich)</h4>
-                        <div class="ss-price" style="color: #f472b6;">29,90€ <span>/Monat</span></div>
+                        <div class="ss-price">29,90€ <span>/Monat</span></div>
                         <p class="ss-desc">Flexible Lösung – jederzeit kündbar.</p>
                         <ul>
                             <li>29,90€ pro Monat</li>
