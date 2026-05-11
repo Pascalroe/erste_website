@@ -1,12 +1,24 @@
 export default {
   async fetch(request, env, ctx) {
-    // Nur POST-Anfragen erlauben
+    // CORS für beide Domains erlauben
+    const allowedOrigins = [
+      "https://fudora.de",
+      "https://www.fudora.de",
+      "https://fudora.ch",
+      "https://www.fudora.ch"
+    ];
+    
+    const origin = request.headers.get("Origin") || "";
+    const isAllowedOrigin = allowedOrigins.includes(origin) || origin === "";
+    
+    // CORS-Preflight
     if (request.method === "OPTIONS") {
       return new Response(null, {
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": isAllowedOrigin ? origin : allowedOrigins[0],
           "Access-Control-Allow-Methods": "POST, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Max-Age": "86400",
         },
       });
     }
@@ -137,15 +149,29 @@ export default {
           status: response.status
         }), {
           status: 500,
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": isAllowedOrigin ? origin : allowedOrigins[0],
+          },
         });
       }
 
       // Erfolgreich - Weiterleitung zur Danke-Seite
+      // Original-URL merken für korrekte Weiterleitung
+      const referer = request.headers.get("Referer") || "";
+      let thankYouUrl = "/danke.html";
+      
+      if (referer.includes("fudora.ch")) {
+        thankYouUrl = "https://fudora.ch/danke.html";
+      } else if (referer.includes("fudora.de")) {
+        thankYouUrl = "https://fudora.de/danke.html";
+      }
+      
       return new Response(null, {
         status: 302,
         headers: {
-          "Location": "/danke.html",
+          "Location": thankYouUrl,
+          "Access-Control-Allow-Origin": isAllowedOrigin ? origin : allowedOrigins[0],
         },
       });
 
