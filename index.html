@@ -518,10 +518,9 @@
         .choice-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            gap: 40px;
             max-width: 1100px;
-            margin: 60px auto 0;
-            margin: 60px auto 0;
+            margin: 80px auto 0;
         }
         .choice-card {
             background: #1e293b;
@@ -533,6 +532,13 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            min-height: 360px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        .choice-card:hover {
+            border-color: transparent;
+            box-shadow: 0 20px 50px rgba(14, 165, 233, 0.25);
+            transform: translateY(-8px);
         }
         .choice-card::before {
             content: '';
@@ -544,15 +550,9 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.4s ease;
-            border-radius: 24px 24px 0 0;
         }
         .choice-card:hover::before {
             transform: scaleX(1);
-        }
-        .choice-card:hover {
-            border-color: transparent;
-            box-shadow: 0 24px 60px rgba(30, 64, 175, 0.35);
-            transform: translateY(-8px);
         }
         .choice-card .card-icon {
             width: 56px;
@@ -965,16 +965,16 @@
         .process-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            gap: 24px;
             margin-top: 60px;
-            max-width: 1150px;
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
         .process-step {
             text-align: center;
             position: relative;
-            padding: 32px 16px;
+            padding: 40px 20px;
             background: rgba(255,255,255,0.06);
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
@@ -1282,20 +1282,26 @@
         }
         .why-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-            max-width: 1050px;
-            margin: 50px auto 0;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            max-width: 1400px;
+            margin: 60px auto 0;
         }
         .why-card {
             background: #1e293b;
             border-radius: 24px;
-            padding: 36px 28px;
+            padding: 40px 32px;
             text-align: center;
             border: 1px solid #334155;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        .why-card:hover {
+            border-color: transparent;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(14, 165, 233, 0.2);
         }
         .why-card::before {
             content: '';
@@ -1307,10 +1313,24 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.4s ease;
-            border-radius: 24px 24px 0 0;
         }
         .why-card:hover::before {
             transform: scaleX(1);
+        }
+        .why-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(14, 165, 233, 0.2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .why-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-light);
         }
         .why-card:hover {
             border-color: transparent;
@@ -2891,7 +2911,6 @@
                             <li>Google My Business-Einrichtung</li>
                             <li>2 Revisionsrunden inklusive</li>
                             <li>Blog-Vorbereitung für spätere Erweiterung</li>
-                            <li>Priority-Support per E-Mail (48h)</li>
                         </ul>
                         <div class="pricing-cta">
                             <a href="kontakt.html" class="btn">Jetzt anfragen</a>
@@ -2919,8 +2938,6 @@
                             <li>DSGVO-freundliche Analytics-Alternative</li>
                             <li>3 Revisionsrunden inklusive</li>
                             <li>Logo-Integration und Markenwelt</li>
-                            <li>Persönlicher Ansprechpartner</li>
-                            <li>Monatliche Sicherheits-Updates (1 Jahr)</li>
                         </ul>
                         <div class="pricing-cta">
                             <a href="kontakt.html" class="btn">Jetzt anfragen</a>
@@ -3092,6 +3109,7 @@
                 <div class="faq-grid">
                     <article class="faq-item animate-on-scroll">
                         <h4>Wie lange dauert der Prozess?</h4>
+                        <p>Je nach Umfang 1-3 Wochen. Nach dem Fragebogen erhalten Sie innerhalb von 5 Werktagen den ersten Entwurf. Nach Ihrem Feedback arbeiten wir die Änderungen ein (bis zu 3 Revisionsrunden je nach Paket).</p>
                     </article>
 
                     <article class="faq-item animate-on-scroll delay-1">
@@ -3102,6 +3120,11 @@
                     <article class="faq-item animate-on-scroll delay-2">
                         <h4>Sind die Websites mobil-optimiert?</h4>
                         <p>Absolut! Alle unsere Websites sind von Grund auf "responsive" - sie passen sich automatisch an mobile Geräte, Tablets und Desktops an. Das ist heute Standard und wichtig für Google-Rankings.</p>
+                    </article>
+
+                    <article class="faq-item animate-on-scroll delay-3">
+                        <h4>Was passiert nach der Übergabe?</h4>
+                        <p>Sie erhalten alle Website-Dateien, Zugangsdaten und eine Anleitung. Die Website ist auf Ihrem Hosting (z.B. GitHub Pages) live. Bei Fragen oder Problemen sind wir weiterhin für Sie da.</p>
                     </article>
                 </div>
 
