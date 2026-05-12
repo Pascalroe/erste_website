@@ -1062,6 +1062,9 @@
         .ss-card .ss-btn-primary {
             margin-top: auto;
         }
+        .mobile-cta {
+            display: none;
+        }
         .ss-card::before {
             content: '';
             position: absolute;
@@ -2436,6 +2439,27 @@
                 color: #cbd5e1;
             }
             
+            /* Hosting-Sektion: Ein Button statt pro Karte */
+            .ss-card .ss-btn,
+            .ss-card .ss-btn-primary {
+                display: none;
+            }
+            .mobile-cta {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .mobile-cta .btn {
+                display: inline-block;
+                padding: 16px 32px;
+                font-size: 1.1rem;
+                background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                color: white;
+                border-radius: 12px;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
             /* Warum Grid - LESBAR */
             .why-grid {
                 grid-template-columns: 1fr;
@@ -2820,7 +2844,6 @@
                             <li>Änderungen auf Anfrage (nach Aufwand)</li>
                             <li>Support nur per E-Mail</li>
                         </ul>
-                        <a href="kontakt.html" class="btn ss-btn">Dateien anfragen</a>
                     </article>
 
                     <article class="ss-card animate-on-scroll delay-1">
@@ -2839,7 +2862,6 @@
                             <li>Bis zu 2 kleine Änderungen pro Monat</li>
                             <li>Umsetzung innerhalb 48h</li>
                         </ul>
-                        <a href="kontakt.html" class="btn ss-btn-primary">Hosting starten</a>
                     </article>
 
                     <article class="ss-card animate-on-scroll delay-2">
@@ -2858,8 +2880,12 @@
                             <li>Bis zu 2 kleine Änderungen pro Monat</li>
                             <li>Umsetzung innerhalb 48h</li>
                         </ul>
-                        <a href="kontakt.html" class="btn ss-btn-primary">Hosting starten</a>
                     </article>
+                </div>
+
+                <!-- Gemeinsamer Button für Mobile -->
+                <div class="mobile-cta">
+                    <a href="kontakt.html" class="btn btn-primary">Kontaktformular →</a>
                 </div>
 
                 <div class="ss-ultimate animate-on-scroll">
@@ -2872,7 +2898,6 @@
                         <h3>Ultimative Betreuung</h3>
                         <p>Premium-Paket inklusive + bis zu 8 Änderungen pro Monat – alles aus einer Hand.</p>
                     </div>
-                    <a href="kontakt.html" class="btn ss-btn-primary">Auf Anfrage →</a>
                 </div>
             </div>
         </section>
