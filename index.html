@@ -1851,6 +1851,33 @@
             font-size: 1.1rem;
         }
         
+        @media (max-width: 767px) {
+            /* Nur erste 3 USPs in Pricing-Cards anzeigen */
+            .pricing-features li:nth-child(n+4) {
+                display: none;
+            }
+            
+            /* Mehr Padding in den Cards */
+            .pricing-card {
+                padding: 24px 20px;
+            }
+            
+            /* Größere Schrift für Preise */
+            .pricing-price {
+                font-size: 1.8rem;
+            }
+            
+            /* Mehr Abstand zwischen Listenpunkten */
+            .pricing-features li {
+                margin-bottom: 12px;
+            }
+            
+            /* Größerer gap zwischen Cards */
+            .pricing-grid {
+                gap: 20px;
+            }
+        }
+        
         @media (max-width: 768px) {
             /* Generell kompakter für Mobile */
             body {
