@@ -593,6 +593,10 @@
             width: 100%;
         }
 
+        /* Desktop/Mobile Link-Schalter */
+        .desktop-only { display: inline-flex; }
+        .mobile-only { display: none; }
+
         /* Pakete */
         .pakete {
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 40%, #1e3a5f 70%, #0c4a6e 100%);
@@ -1559,6 +1563,11 @@
                 background: #1e293b !important;
                 border-bottom: 1px solid #334155;
             }
+            
+            /* Desktop/Mobile Link-Schalter */
+            .desktop-only { display: none; }
+            .mobile-only { display: inline-flex; }
+            
             .logo-text {
                 background: linear-gradient(135deg, #38bdf8, #22d3ee);
                 -webkit-background-clip: text;
@@ -1845,8 +1854,12 @@
         @media (max-width: 768px) {
             /* Generell kompakter für Mobile */
             body {
-                font-size: 14px;
+                font-size: 16px;
             }
+            
+            /* Desktop/Mobile Link-Schalter */
+            .desktop-only { display: none; }
+            .mobile-only { display: inline-flex; }
             
             /* Bilder responsive */
             img {
@@ -2429,6 +2442,10 @@
                 max-width: 100%;
                 padding: 0 16px;
             }
+            
+            /* Desktop/Mobile Link-Schalter */
+            .desktop-only { display: none; }
+            .mobile-only { display: inline-flex; }
             
             /* === LESBARKEIT VERBESSERN === */
             /* === DUNKLE SEKTIONEN - HELLE SCHRIFT === */
@@ -3085,7 +3102,8 @@
                         </ul>
                         <div class="pricing-cta">
                             <a href="kontakt.html" class="btn">Jetzt anfragen</a>
-                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
+                            <a href="finder.html" class="btn btn-outline desktop-only">Mehr erfahren</a>
+                            <a href="pakete.html" class="btn btn-outline mobile-only">Mehr erfahren</a>
                         </div>
                     </article>
 
@@ -3110,7 +3128,8 @@
                         </ul>
                         <div class="pricing-cta">
                             <a href="kontakt.html" class="btn">Jetzt anfragen</a>
-                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
+                            <a href="finder.html" class="btn btn-outline desktop-only">Mehr erfahren</a>
+                            <a href="pakete.html" class="btn btn-outline mobile-only">Mehr erfahren</a>
                         </div>
                     </article>
 
@@ -3135,7 +3154,8 @@
                         </ul>
                         <div class="pricing-cta">
                             <a href="kontakt.html" class="btn">Jetzt anfragen</a>
-                            <a href="finder.html" class="btn btn-outline">Mehr erfahren</a>
+                            <a href="finder.html" class="btn btn-outline desktop-only">Mehr erfahren</a>
+                            <a href="pakete.html" class="btn btn-outline mobile-only">Mehr erfahren</a>
                         </div>
                     </article>
                 </div>
