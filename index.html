@@ -1636,10 +1636,90 @@
                 grid-template-columns: 1fr;
                 max-width: 450px;
                 margin: 0 auto;
+                gap: 20px;
             }
-            .maintenance-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .pricing-card {
+                padding: 24px 20px;
+                min-height: auto;
+            }
+            .pricing-card h3 {
+                font-size: 1.25rem;
+            }
+            .pricing-card .price {
+                font-size: 1.75rem;
+                margin-bottom: 12px;
+            }
+            .pricing-card ul {
+                margin-bottom: 16px;
+            }
+            .pricing-card li {
+                font-size: 0.9rem;
+                padding: 6px 0;
+            }
+            .pricing-card .btn {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+            .maintenance-grid, .ss-grid {
+                grid-template-columns: 1fr;
                 gap: 16px;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+            .ss-card {
+                padding: 24px 20px;
+                min-height: auto;
+                background: rgba(255,255,255,0.08) !important;
+                border-color: rgba(255,255,255,0.15) !important;
+                color: #e2e8f0;
+            }
+            .ss-card h4 {
+                font-size: 1.2rem;
+                color: #ffffff !important;
+            }
+            .ss-card .ss-price {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+                color: #22d3ee !important;
+            }
+            .ss-card .ss-desc {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+                color: #cbd5e1 !important;
+            }
+            .ss-card ul {
+                margin-bottom: 16px;
+            }
+            .ss-card li {
+                font-size: 0.85rem;
+                padding: 5px 0;
+                color: #cbd5e1 !important;
+            }
+            .ss-ultimate {
+                padding: 24px 20px;
+                margin-top: 24px;
+                background: rgba(34, 211, 238, 0.1) !important;
+                border-color: rgba(34, 211, 238, 0.3) !important;
+            }
+            .ss-ultimate h3 {
+                color: #ffffff !important;
+            }
+            .ss-ultimate p {
+                color: #cbd5e1 !important;
+                font-size: 0.9rem;
+            }
+            .desktop-hosting-cta {
+                display: none;
+            }
+            .mobile-cta {
+                display: block;
+                margin-top: 24px;
+                text-align: center;
+            }
+            .mobile-cta .btn {
+                display: inline-block;
+                padding: 14px 28px;
+                font-size: 1rem;
             }
             .faq-grid {
                 grid-template-columns: 1fr;
@@ -2318,29 +2398,50 @@
             }
             
             /* === LESBARKEIT VERBESSERN === */
-            /* Dunkle Sektionen - helle Schrift */
-            .choice, .prozess, .self-service, .cta-section {
+            /* === DUNKLE SEKTIONEN - HELLE SCHRIFT === */
+            .choice, .prozess, .self-service, .cta-section, .pakete {
                 color: #ffffff;
             }
             .choice .section-title, .prozess .section-title, 
-            .self-service .section-title, .cta-section h2 {
+            .self-service .section-title, .cta-section h2,
+            .pakete .section-title {
                 color: #ffffff !important;
             }
             .choice .section-subtitle, .prozess .section-subtitle, 
-            .self-service .section-subtitle, .cta-section p {
+            .self-service .section-subtitle, .cta-section p,
+            .pakete .section-subtitle {
                 color: #f1f5f9 !important;
             }
             
+            /* Pakete Section - dunkler Hintergrund auf Mobile */
+            .pakete {
+                background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%) !important;
+            }
+            
+            /* Pricing Cards auf Mobile - kompakter und dunkler Hintergrund */
+            .pricing-card {
+                background: rgba(255,255,255,0.08) !important;
+                border-color: rgba(255,255,255,0.15) !important;
+                color: #e2e8f0;
+            }
+            .pricing-card h3 {
+                color: #ffffff !important;
+            }
+            .pricing-card .price {
+                color: #22d3ee !important;
+            }
+            .pricing-card li {
+                color: #cbd5e1 !important;
+            }
+            
             /* Helle Sektionen - dunkle Schrift */
-            .pakete, .warum, .faq {
+            .warum, .faq {
                 color: #0f172a !important;
             }
-            .pakete .section-title, .warum .section-title, 
-            .faq .section-title {
+            .warum .section-title, .faq .section-title {
                 color: #0f172a !important;
             }
-            .pakete .section-subtitle, .warum .section-subtitle, 
-            .faq .section-subtitle {
+            .warum .section-subtitle, .faq .section-subtitle {
                 color: #334155 !important;
             }
             
@@ -3006,7 +3107,6 @@
                         <ul>
                             <li>Alle Website-Dateien werden übergeben</li>
                             <li>Sie wählen Ihren eigenen Hoster</li>
-                            <li>Änderungen auf Anfrage (nach Aufwand)</li>
                             <li>Support nur per E-Mail</li>
                         </ul>
                     </article>
@@ -3022,10 +3122,8 @@
                         <p class="ss-desc">Wir hosten für Sie – inklusive kleinerer Änderungen. Mindestlaufzeit 12 Monate.</p>
                         <ul>
                             <li>19,90€ pro Monat (bei jährlicher Zahlung)</li>
-                            <li>Monatlich kündbar nach 12 Monaten</li>
                             <li>Cloudflare-Hosting inklusive</li>
                             <li>Bis zu 2 kleine Änderungen pro Monat</li>
-                            <li>Umsetzung innerhalb 48h</li>
                         </ul>
                     </article>
 
@@ -3040,10 +3138,8 @@
                         <p class="ss-desc">Flexible Lösung – jederzeit kündbar.</p>
                         <ul>
                             <li>29,90€ pro Monat</li>
-                            <li>Jederzeit monatlich kündbar</li>
                             <li>Cloudflare-Hosting inklusive</li>
                             <li>Bis zu 2 kleine Änderungen pro Monat</li>
-                            <li>Umsetzung innerhalb 48h</li>
                         </ul>
                     </article>
                 </div>
