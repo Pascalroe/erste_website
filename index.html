@@ -33,6 +33,25 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #22d3ee, #0ea5e9, #2563eb);
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Card Border Glow */
+        .pricing-card:hover,
+        .choice-card:hover {
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+            border-color: #22d3ee;
+        }
         body {
             position: relative;
             z-index: 1;
@@ -2971,6 +2990,7 @@
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
 
     <!-- Navigation -->
@@ -3472,6 +3492,15 @@
                 btn.textContent = 'Weniger anzeigen';
             }
         }
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
     </script>
 </body>
 </html>
