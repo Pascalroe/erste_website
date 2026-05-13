@@ -23,7 +23,7 @@
         .hero-badge { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
         .hero-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
         .cat-section { padding: 64px 0; }
-        .cat-section.alt { background: var(--gray-50); }
+        .cat-section.alt { background: var(--gray-50); padding: 80px 0; }
         .cat-section.dark { background: var(--gray-900); border-top: 3px solid var(--primary); border-bottom: 3px solid var(--primary); }
         .cat-header { text-align: center; margin-bottom: 48px; padding: 0 24px; }
         .cat-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -74,7 +74,15 @@
         .dark .pkg-card.featured { background: rgba(34,211,238,0.08); border-color: var(--cyan); box-shadow: 0 8px 32px rgba(34,211,238,0.15); }
         .dark .pkg-name, .dark .pkg-price { color: white; }
         .alt .pkg-card:hover { border-color: transparent; box-shadow: 0 20px 48px rgba(30,64,175,0.1); }
-        .section-divider { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 0 24px; margin: 0 auto; max-width: 1160px; }
+        
+        /* Hosting-Sektion größer */
+        .alt .cat-title { font-size: 2.5rem; }
+        .alt .cat-subtitle { font-size: 1.15rem; }
+        .alt .pkg-name { font-size: 1.3rem; }
+        .alt .pkg-price { font-size: 2.2rem; }
+        .alt .pkg-desc { font-size: 1.05rem; }
+        .alt .pkg-fi li { font-size: 1rem; }
+        .section-divider { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 24px; margin: 48px auto; max-width: 1160px; }
         .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
         .section-divider span { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; }
         footer { background: var(--gray-900); color: var(--gray-400); padding: 32px 24px; text-align: center; }
