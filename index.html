@@ -1852,14 +1852,19 @@
         }
         
         @media (max-width: 767px) {
-            /* Nur erste 3 USPs in Pricing-Cards anzeigen */
-            .pricing-features li:nth-child(n+4) {
+            /* NUR die erste 3 USPs in der kurzen Liste anzeigen */
+            .pricing-features-preview li:nth-child(n+4) {
                 display: none;
             }
-
+            
             /* Kurze Liste auf Mobile anzeigen */
             .pricing-features-preview {
                 display: block;
+            }
+            
+            /* Lange Liste auf Mobile komplett ausblenden */
+            .pricing-features {
+                display: none;
             }
 
             /* Mehr Padding in den Cards */
