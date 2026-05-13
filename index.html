@@ -1620,8 +1620,19 @@
                 font-size: 0.95rem;
                 margin-bottom: 20px;
             }
-            .choice-card .btn-large {
+            .choice-card .card-icon,
+            .choice-card h3,
+            .choice-card p {
                 width: 100%;
+                text-align: left;
+            }
+            .choice-card .card-cta {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: auto;
+            }
+            .choice-card .btn-large {
                 text-align: center;
                 justify-content: center;
                 margin: 20px auto 0;
@@ -1926,8 +1937,19 @@
                 margin-bottom: 8px;
                 display: none;
             }
-            .choice-card .btn-large {
+            .choice-card .card-icon,
+            .choice-card h3,
+            .choice-card p {
                 width: 100%;
+                text-align: left;
+            }
+            .choice-card .card-cta {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: auto;
+            }
+            .choice-card .btn-large {
                 justify-content: center;
                 margin: 10px auto 0;
             }
@@ -2556,9 +2578,20 @@
                 color: #cbd5e1;
                 display: block;
             }
+            .choice-card .card-icon,
+            .choice-card h3,
+            .choice-card p {
+                width: 100%;
+                text-align: left;
+            }
+            .choice-card .card-cta {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: auto;
+            }
             .choice-card .btn-large {
                 display: inline-flex;
-                width: 100%;
                 text-align: center;
                 justify-content: center;
                 margin: 20px auto 0;
@@ -2983,7 +3016,9 @@
                     </div>
                     <h3>Neue Webseite erstellen</h3>
                     <p>Sie haben noch keine Webseite? Wir erstellen eine komplett neue, maßgeschneiderte Lösung für Sie - von Grund auf.</p>
-                    <a href="#pakete" class="btn btn-large">Pakete ansehen</a>
+                    <div class="card-cta">
+                        <a href="#pakete" class="btn btn-large">Pakete ansehen</a>
+                    </div>
                 </article>
 
                 <article class="choice-card animate-on-scroll delay-1">
@@ -2994,7 +3029,9 @@
                     </div>
                     <h3>Webseite erneuern (Relaunch)</h3>
                     <p>Sie haben bereits eine Webseite, die nicht mehr aktuell ist? Wir modernisieren und relaunchen sie für Sie.</p>
-                    <a href="relaunch.html" class="btn btn-large btn-outline">Kostenlose Einschätzung</a>
+                    <div class="card-cta">
+                        <a href="relaunch.html" class="btn btn-large btn-outline">Kostenlose Einschätzung</a>
+                    </div>
                 </article>
             </div>
         </div>
