@@ -1902,8 +1902,8 @@
             .choice-card {
                 padding: 20px 16px;
                 display: flex;
-                flex-direction: row;
-                align-items: center;
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 12px;
                 text-align: left;
             }
@@ -1925,6 +1925,11 @@
                 font-size: 0.8rem;
                 margin-bottom: 8px;
                 display: none;
+            }
+            .choice-card .btn-large {
+                width: 100%;
+                justify-content: center;
+                margin: 10px auto 0;
             }
             /* Mobile Pricing - KOMPAKT */
             .pricing-grid {
