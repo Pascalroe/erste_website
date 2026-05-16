@@ -1492,6 +1492,72 @@
         .faq .section-subtitle {
             color: #94a3b8;
         }
+        
+        /* Templates Section */
+        .templates-section {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        .template-card {
+            display: block;
+            background: rgba(255,255,255,0.07);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+        .template-card:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .template-preview {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: #1e293b;
+        }
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+        .template-card:hover .template-preview img {
+            transform: scale(1.05);
+        }
+        .template-name {
+            padding: 16px;
+            text-align: center;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .templates-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .templates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .template-preview {
+                aspect-ratio: 4/3;
+            }
+        }
+        
         .faq-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -3232,6 +3298,7 @@
                 <a href="#pakete">Pakete</a>
                 <a href="#self-service">Hosting</a>
                 <a href="#prozess">Prozess</a>
+                <a href="referenzen.html">Referenzen</a>
                 <a href="#faq">FAQ</a>
                 <a href="kontakt.html" class="highlight-link">Kontakt</a>
             </div>
@@ -3579,6 +3646,51 @@
                         <div class="why-title">Persönliche Betreuung</div>
                         <div class="why-desc">Direkter Ansprechpartner. Kein Call-Center, keine anonymen Support-Tickets.</div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unsere Templates Section -->
+        <section class="templates-section" id="referenzen" aria-labelledby="templates-title">
+            <div class="container">
+                <h2 id="templates-title" class="section-title">Was ist möglich?</h2>
+                <p class="section-subtitle">Entdecken Sie unsere professionellen Templates für verschiedene Branchen</p>
+                
+                <div class="templates-grid">
+                    <a href="referenzen.html" class="template-card animate-on-scroll">
+                        <div class="template-preview">
+                            <img src="img/template1-preview.png" alt="NEURONIX Template" loading="lazy">
+                        </div>
+                        <div class="template-name">template1</div>
+                    </a>
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-1">
+                        <div class="template-preview">
+                            <img src="img/template2-preview.png" alt="ÉTOILE Template" loading="lazy">
+                        </div>
+                        <div class="template-name">template2</div>
+                    </a>
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-2">
+                        <div class="template-preview">
+                            <img src="img/template3-preview.png" alt="NOIR//SYSTEM Template" loading="lazy">
+                        </div>
+                        <div class="template-name">template3</div>
+                    </a>
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-3">
+                        <div class="template-preview">
+                            <img src="img/template4-preview.png" alt="Meisterwerk Hoffmann Template" loading="lazy">
+                        </div>
+                        <div class="template-name">template4</div>
+                    </a>
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-4">
+                        <div class="template-preview">
+                            <img src="img/template5-preview.png" alt="SV Grünweiß Template" loading="lazy">
+                        </div>
+                        <div class="template-name">template5</div>
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="referenzen.html" class="btn btn-large">Alle Templates ansehen →</a>
                 </div>
             </div>
         </section>
