@@ -3776,31 +3776,31 @@
                 <p class="section-subtitle">Entdecken Sie unsere professionellen Templates für verschiedene Branchen</p>
                 
                 <div class="templates-grid">
-                    <a href="referenzen.html" class="template-card animate-on-scroll">
+                    <a href="referenzen.html" class="template-card animate-on-scroll" data-desktop-href="https://pascalroe.github.io/template1/">
                         <div class="template-preview">
                             <img src="img/template1-preview.png" alt="NEURONIX Template" loading="lazy">
                         </div>
                         <div class="template-name">NEURONIX</div>
                     </a>
-                    <a href="referenzen.html" class="template-card animate-on-scroll delay-1">
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-1" data-desktop-href="https://pascalroe.github.io/template2/">
                         <div class="template-preview">
                             <img src="img/template2-preview.png" alt="ÉTOILE Template" loading="lazy">
                         </div>
                         <div class="template-name">ÉTOILE</div>
                     </a>
-                    <a href="referenzen.html" class="template-card animate-on-scroll delay-2">
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-2" data-desktop-href="https://pascalroe.github.io/template3/">
                         <div class="template-preview">
                             <img src="img/template3-preview.png" alt="NOIR//SYSTEM Template" loading="lazy">
                         </div>
                         <div class="template-name">NOIR//SYSTEM</div>
                     </a>
-                    <a href="referenzen.html" class="template-card animate-on-scroll delay-3">
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-3" data-desktop-href="https://pascalroe.github.io/template4/">
                         <div class="template-preview">
                             <img src="img/template4-preview.png" alt="Meisterwerk Hoffmann Template" loading="lazy">
                         </div>
                         <div class="template-name">Meisterwerk</div>
                     </a>
-                    <a href="referenzen.html" class="template-card animate-on-scroll delay-4">
+                    <a href="referenzen.html" class="template-card animate-on-scroll delay-4" data-desktop-href="https://pascalroe.github.io/template5/">
                         <div class="template-preview">
                             <img src="img/template5-preview.png" alt="SV Grünweiß Template" loading="lazy">
                         </div>
@@ -3952,6 +3952,27 @@
             const scrollPercent = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = scrollPercent + '%';
         });
+
+        // Template Cards: Direct links on Desktop, referenzen.html on Mobile
+        function updateTemplateLinks() {
+            const isDesktop = window.innerWidth > 768;
+            const templateCards = document.querySelectorAll('.template-card');
+            
+            templateCards.forEach(card => {
+                const desktopHref = card.getAttribute('data-desktop-href');
+                if (desktopHref) {
+                    if (isDesktop) {
+                        card.href = desktopHref;
+                    } else {
+                        card.href = 'referenzen.html';
+                    }
+                }
+            });
+        }
+
+        // Update on load and resize
+        updateTemplateLinks();
+        window.addEventListener('resize', updateTemplateLinks);
     </script>
 </body>
 </html>
