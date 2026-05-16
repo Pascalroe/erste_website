@@ -170,81 +170,6 @@
             font-weight: 600;
         }
 
-        /* Burger Menu Button */
-        .burger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            padding: 12px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            border: none;
-            min-height: 48px;
-            align-items: center;
-        }
-        .burger span {
-            display: block;
-            width: 24px;
-            height: 3px;
-            background: #ffffff;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        .burger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-        .burger.active span:nth-child(2) {
-            opacity: 0;
-            transform: translateX(-10px);
-        }
-        .burger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        /* Mobile Menu Overlay */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #0f172a;
-            z-index: 99;
-            padding: 100px 24px 40px;
-            flex-direction: column;
-            gap: 0;
-            overflow-y: auto;
-        }
-        .mobile-menu.open {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        .mobile-menu a {
-            display: block;
-            padding: 20px 0;
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.85);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .mobile-menu a:hover {
-            color: #22d3ee;
-            transform: translateX(5px);
-        }
-        .mobile-menu a:last-child {
-            border-bottom: none;
-            color: #22d3ee;
-            font-weight: 700;
-            margin-top: 12px;
-            padding-top: 24px;
-        }
-
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -431,12 +356,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .burger {
-                display: flex;
-            }
             .page-header {
                 padding: 140px 0 60px;
             }
@@ -516,24 +435,8 @@
                 <a href="index.html#faq">FAQ</a>
                 <a href="kontakt.html" class="highlight-link">Kontakt</a>
             </div>
-            <button class="burger" aria-label="Menü öffnen" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <a href="index.html#auswahl">Auswahl</a>
-        <a href="index.html#pakete">Pakete</a>
-        <a href="index.html#self-service">Hosting</a>
-        <a href="index.html#prozess">Prozess</a>
-        <a href="referenzen.html">Referenzen</a>
-        <a href="index.html#faq">FAQ</a>
-        <a href="kontakt.html">Kontakt</a>
-    </div>
 
     <!-- Page Header -->
     <header class="page-header">
@@ -658,36 +561,6 @@
             }
         });
 
-        // Burger Menu Toggle
-        const burger = document.querySelector('.burger');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        burger.addEventListener('click', () => {
-            const isOpen = burger.classList.toggle('active');
-            mobileMenu.classList.toggle('open');
-            burger.setAttribute('aria-expanded', isOpen);
-            burger.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-
-        // Close menu when link is clicked
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                burger.classList.remove('active');
-                mobileMenu.classList.remove('open');
-                burger.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.getElementById('scrollProgress');
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
     </script>
 </body>
 </html>
