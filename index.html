@@ -1548,6 +1548,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .templates-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
         
         @media (max-width: 1024px) {
             .templates-grid {
@@ -1559,16 +1563,24 @@
             }
         }
         @media (max-width: 640px) {
+            .templates-section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 1.75rem;
+            }
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
             .templates-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                display: none;
             }
-            .template-preview {
-                aspect-ratio: 4/3;
+            .templates-cta {
+                margin-top: 20px;
             }
-            .template-name {
-                font-size: 0.7rem;
-                padding: 8px;
+            .templates-cta .btn {
+                width: 100%;
+                padding: 16px 24px;
             }
         }
         
@@ -3703,7 +3715,7 @@
                     </a>
                 </div>
                 
-                <div style="text-align: center; margin-top: 40px;">
+                <div class="templates-cta">
                     <a href="referenzen.html" class="btn btn-large">Alle Templates ansehen →</a>
                 </div>
             </div>
