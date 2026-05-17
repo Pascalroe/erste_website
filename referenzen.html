@@ -281,13 +281,22 @@
             position: relative;
             z-index: 1;
         }
+        
+        /* Grid Layout für Desktop - alle Templates auf einmal sichtbar */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
         .template-detail-card {
             background: rgba(255,255,255,0.07);
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
             transition: all 0.35s ease;
-            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
         }
         .template-detail-card:hover {
             background: rgba(255,255,255,0.1);
@@ -297,7 +306,7 @@
         }
         .template-detail-image {
             width: 100%;
-            aspect-ratio: 16/9;
+            aspect-ratio: 16/10;
             overflow: hidden;
             background: #1e293b;
         }
@@ -311,25 +320,34 @@
             transform: scale(1.02);
         }
         .template-detail-content {
-            padding: 32px;
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .template-detail-name {
             color: var(--white);
-            font-size: 1.75rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             letter-spacing: -0.02em;
         }
         .template-detail-desc {
             color: #94a3b8;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
         }
         .template-detail-actions {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
+        }
+        .template-detail-actions .btn {
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            min-height: 40px;
         }
 
         /* Footer */
@@ -408,6 +426,19 @@
             }
             .page-header p {
                 font-size: 1rem;
+            }
+            
+            /* Mobile: einspaltiges Layout */
+            .templates-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            /* Tablet: 2 Spalten */
+            @media (min-width: 769px) and (max-width: 1100px) {
+                .templates-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
             }
             .templates-section {
                 padding: 60px 0;
@@ -495,6 +526,7 @@
     <!-- Templates Section -->
     <section class="templates-section">
         <div class="container">
+            <div class="templates-grid">
             
             <!-- Template 1 -->
             <article class="template-detail-card animate-on-scroll">
@@ -570,6 +602,8 @@
                     </div>
                 </div>
             </article>
+
+            </div>
 
         </div>
     </section>
